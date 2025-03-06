@@ -1,8 +1,9 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
   return {
     plugins: [react()],
     resolve: {
@@ -17,7 +18,7 @@ export default defineConfig(() => {
       allowedHosts: ["graduated-disposition-effect-epa.trycloudflare.com"],
       proxy: {
         "/api": {
-          target: "http://localhost:4000",
+          target: env.VITE_PRIVATE_API_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
           secure: false,
