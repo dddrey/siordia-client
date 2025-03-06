@@ -1,0 +1,101 @@
+import { IFolder, ILesson, ITopic } from "../../types/interfaces";
+import { Fragment } from "react";
+import FolderItem from "./item";
+import ErrorComponent from "../error";
+import Skeleton from "../ui/skeleton";
+
+interface ItemsListProps {
+  items: IFolder[] | ITopic[] | ILesson<"preview">[];
+  title: string;
+  subtitle?: string;
+  href: string;
+  params?: string;
+  isLoading?: boolean;
+  isError?: boolean;
+  onClick?: (id: string) => void;
+  type?: "default" | "permission";
+  hasAccess?: boolean;
+}
+
+const ItemsList = ({
+  items,
+  title,
+  href,
+  isLoading,
+  isError,
+  subtitle,
+  type = "default",
+  onClick,
+  params,
+  hasAccess = false,
+}: ItemsListProps) => {
+  if (isLoading) {
+    return (
+      <section className="w-full h-full flex flex-col gap-[4px] mt-4">
+        <div className="w-[94%] mx-auto h-[48px] mb-1">
+          <Skeleton height={48} width={"100%"} borderRadius={10} />
+        </div>
+        <div className="w-[94%] mx-auto h-[48px]">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              height={56}
+              width={"100%"}
+              borderRadius={10}
+              className="mb-1"
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="mt-5">
+        <ErrorComponent
+          code={500}
+          withButton={false}
+          title="Упс! Ошибка"
+          description="Произошла ошибка при загрузке данных. Попробуйте еще раз. Возможно проблема на нашей стороне"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <section className="w-full h-full flex flex-col gap-[4px] pt-5 pb-8">
+      <div className="w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-between">
+        <p className="text-[16px] font-medium text-textPrimary">{title}</p>
+        <p className="text-[12px] font-medium text-textPrimary">{subtitle}</p>
+      </div>
+      {items.length === 0 && (
+        <Fragment>
+          <p className="text-[18px] font-medium mx-auto mt-10 mb-2 text-textSecondary">
+            Нет элементов
+          </p>
+        </Fragment>
+      )}
+      {items.map((item) => {
+        const hasSubscriptionField = "isSubscriptionRequired" in item;
+        return (
+          <FolderItem
+            item={{
+              id: item.id,
+              href: `${href}/${item.id}${params ? params : ""}`,
+              title: item.name,
+              type: type,
+              hasAccess: hasSubscriptionField
+                ? !item.isSubscriptionRequired || hasAccess
+                : true,
+            }}
+            onClick={onClick}
+            key={item.id}
+          />
+        );
+      })}
+    </section>
+  );
+};
+
+export default ItemsList;

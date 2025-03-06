@@ -1,0 +1,39 @@
+"use client";
+
+import ItemsList from "@/shared/components/items/items-list";
+import LogoImage from "@/shared/components/logo-Image";
+import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
+import { useParams } from "react-router-dom";
+import { useFolder } from "@/shared/hooks/use-folders";
+import withAuth from "@/shared/components/hoc/auth";
+
+const FolderScreen = () => {
+  const { id } = useParams();
+  const { data: folder, isLoading, error } = useFolder(id as string);
+
+  return (
+    <ContentWrapper withFooter={false} className="pt-safe-area">
+      <LogoImage
+        isLoading={isLoading}
+        title={folder?.name}
+        type="large"
+        className="mx-auto bg-primary p-3 rounded-[10px] w-[94%]"
+      />
+      <ItemsList
+        items={folder?.topics || []}
+        isLoading={isLoading}
+        isError={!!error}
+        title={`Темы папки ${folder?.name.toLowerCase()}`}
+        href={`/topics`}
+        params={`/?type=${folder?.type}`}
+      />
+    </ContentWrapper>
+  );
+};
+
+FolderScreen.displayName = "FolderScreen";
+
+const WrappedFolderScreen = withAuth(FolderScreen) as React.FC;
+WrappedFolderScreen.displayName = "WrappedFolderScreen";
+
+export default WrappedFolderScreen;
