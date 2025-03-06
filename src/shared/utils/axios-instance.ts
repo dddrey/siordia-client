@@ -6,7 +6,9 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "init-data": import.meta.env.VITE_DEV_TELEGRAM_INIT_DATA,
+    "init-data":
+      window.Telegram.WebApp.initData ||
+      import.meta.env.VITE_DEV_TELEGRAM_INIT_DATA,
   },
 });
 
