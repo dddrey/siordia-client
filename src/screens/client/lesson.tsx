@@ -49,7 +49,12 @@ const LessonScreen = () => {
         previousLessonId={previousLessonId}
         nextLessonId={nextLessonId}
       />
-      <VideoPlayer src={lesson.video} />
+      <VideoPlayer
+        src={
+          lesson.video ||
+          "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+        }
+      />
       {lesson.description && (
         <div className="w-[94%] mt-2 mx-auto rounded-[12px] p-3 bg-primary shadow-card-sm-light mb-1 flex flex-col items-center">
           <TextContainer

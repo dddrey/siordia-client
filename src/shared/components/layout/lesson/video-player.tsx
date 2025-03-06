@@ -2,6 +2,7 @@ interface VideoPlayerProps {
   src: string;
 }
 
+
 const VideoPlayer = ({ src }: VideoPlayerProps) => {
   return (
     <video
@@ -9,10 +10,7 @@ const VideoPlayer = ({ src }: VideoPlayerProps) => {
       controls
       playsInline
     >
-      <source
-        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-        type="video/mp4"
-      />
+      <source src={src} type="video/mp4" />
       Ваш браузер не поддерживает видео тег.
     </video>
   );

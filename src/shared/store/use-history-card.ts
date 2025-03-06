@@ -1,11 +1,11 @@
-import { ILesson } from '@/types/interfaces';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { ILesson } from "@/shared/types/interfaces";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface HistoryCardStore {
-  lesson: ILesson<'preview' | 'full'> | null;
-  setLesson: (lesson: ILesson<'preview' | 'full'>) => void;
-  updateLesson: (updatedLesson: Partial<ILesson<'preview' | 'full'>>) => void;
+  lesson: ILesson<"preview" | "full"> | null;
+  setLesson: (lesson: ILesson<"preview" | "full">) => void;
+  updateLesson: (updatedLesson: Partial<ILesson<"preview" | "full">>) => void;
   clearLesson: () => void;
   isOpen: boolean;
   onOpen: () => void;
@@ -27,7 +27,7 @@ export const useHistoryCardStore = create<HistoryCardStore>()(
       clearLesson: () => set(() => ({ lesson: null })),
     }),
     {
-      name: 'history-card',
+      name: "history-card",
     }
   )
 );
