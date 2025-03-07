@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
       allowedHosts: [
         "graduated-disposition-effect-epa.trycloudflare.com",
         "siordia-client-production.up.railway.app",
+        "skill-up-football.xyz",
       ],
       proxy: {
         "/api": {
