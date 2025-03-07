@@ -5,7 +5,7 @@ ENV VITE_PRIVATE_API_URL=$VITE_PRIVATE_API_URL
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
 RUN npm ci
 COPY . .
 
