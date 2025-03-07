@@ -15,6 +15,10 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       port: 5182,
       strictPort: true,
+      allowedHosts: [
+        "graduated-disposition-effect-epa.trycloudflare.com",
+        "siordia-client-production.up.railway.app",
+      ],
       proxy: {
         "/api": {
           target: env.VITE_PRIVATE_API_URL,
