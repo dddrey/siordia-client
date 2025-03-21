@@ -2,16 +2,19 @@ import { subscriptionsService } from "../services/subscription.service";
 import { ContentType } from "../types/interfaces";
 import { useState } from "react";
 import { useUser } from "./use-user";
-
 export const useSubscription = () => {
-  const { refetch, data: user } = useUser();
+  const { data: user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAddSubscription = async (type: ContentType) => {
     try {
       setIsLoading(true);
-      await subscriptionsService.addSubscription(type);
-      await refetch();
+      const response = await subscriptionsService.getPaimenLink();
+      window.Telegram.WebApp.openInvoice(response.data.paymentUrl, (status) => {
+        if (status === "paid") {
+          subscriptionsService.addSubscription(type);
+        }
+      });
     } catch (error) {
       console.error("Ошибка при добавлении подписки:", error);
     } finally {
