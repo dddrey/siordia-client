@@ -9,11 +9,11 @@ export const useSubscription = () => {
   const handleAddSubscription = async (type: ContentType) => {
     try {
       setIsLoading(true);
-      const response = await subscriptionsService.getPaimenLink();
-      window.Telegram.WebApp.openInvoice(response.data.paymentUrl, (status) => {
+      const res = await subscriptionsService.getPaimenLink();
+      window.Telegram.WebApp.openInvoice(res.data.paymentUrl, (status) => {
         if (status === "paid") {
           subscriptionsService.addSubscription(type);
-          console.log(response);
+          console.log(res);
         }
       });
     } catch (error) {
