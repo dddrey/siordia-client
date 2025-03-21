@@ -13,7 +13,7 @@ export const useSubscription = () => {
       window.Telegram.WebApp.openInvoice(response.data.paymentUrl, (status) => {
         if (status === "paid") {
           subscriptionsService.addSubscription(type);
-          setIsLoading(false);
+          console.log(response);
         }
       });
     } catch (error) {
