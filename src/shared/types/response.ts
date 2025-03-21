@@ -22,3 +22,11 @@ export interface GetTopic {
   topic: ITopic;
   isHavePermission: boolean;
 }
+
+export interface PaymentResponse {
+  success: boolean;
+  data: {
+    paymentUrl: string;
+    paymentId: string;
+  };
+}

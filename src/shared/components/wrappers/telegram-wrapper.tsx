@@ -1,6 +1,7 @@
 import useTelegram from "@/shared/hooks/use-telegram";
 import { useEffect } from "react";
 import BackButtonWrapper from "./backbutton-wrapper";
+import { subscriptionsService } from "@/shared/services/subscription.service";
 
 export const TelegramWrapper = ({
   children,
@@ -20,6 +21,11 @@ export const TelegramWrapper = ({
       webAppState.setBackgroundColor("#fff");
       webAppState.setHeaderColor("#fff");
       webAppState.lockOrientation();
+      subscriptionsService.getPaimenLink().then((link) => {
+        webAppState.openInvoice(link.data.paymentUrl, (status) => {
+          console.log("status", status);
+        });
+      });
     } catch (error) {
       console.log("err", error);
     }
