@@ -25,8 +25,5 @@ export interface GetTopic {
 
 export interface PaymentResponse {
   success: boolean;
-  data: {
-    paymentUrl: string;
-    paymentId: string;
-  };
+  data: string;
 }

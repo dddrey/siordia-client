@@ -23,7 +23,7 @@ export const TelegramWrapper = ({
       webAppState.lockOrientation();
       subscriptionsService.getPaimenLink().then((link) => {
         console.log("link", link);
-        webAppState.openInvoice(link.data.paymentUrl, (status) => {
+        webAppState.openInvoice(link.data, (status) => {
           console.log("status", status);
         });
       });
