@@ -2,6 +2,8 @@ import { subscriptionsService } from "../services/subscription.service";
 import { ContentType } from "../types/interfaces";
 import { useState } from "react";
 import { useUser } from "./use-user";
+import { toast } from "react-hot-toast";
+
 export const useSubscription = () => {
   const { data: user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -9,10 +11,10 @@ export const useSubscription = () => {
   const handleAddSubscription = async (type: ContentType) => {
     try {
       setIsLoading(true);
-      const res = await subscriptionsService.getPaimenLink();
+      const res = await subscriptionsService.getPaimenLink(type);
       window.Telegram.WebApp.openInvoice(res.data, (status) => {
         if (status === "paid") {
-          subscriptionsService.addSubscription(type);
+          toast.success("Подписка успешно добавлена");
         }
       });
     } catch (error) {
