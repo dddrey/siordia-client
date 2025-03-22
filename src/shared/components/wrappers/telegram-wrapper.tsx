@@ -22,6 +22,7 @@ export const TelegramWrapper = ({
       webAppState.setHeaderColor("#fff");
       webAppState.lockOrientation();
       subscriptionsService.getPaimenLink().then((link) => {
+        console.log("link", link);
         webAppState.openInvoice(link.data.paymentUrl, (status) => {
           console.log("status", status);
         });
