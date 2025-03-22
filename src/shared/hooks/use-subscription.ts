@@ -10,7 +10,7 @@ export const useSubscription = () => {
     try {
       setIsLoading(true);
       const res = await subscriptionsService.getPaimenLink();
-      window.Telegram.WebApp.openInvoice(res.data.paymentUrl, (status) => {
+      window.Telegram.WebApp.openInvoice(res.data, (status) => {
         if (status === "paid") {
           subscriptionsService.addSubscription(type);
         }
