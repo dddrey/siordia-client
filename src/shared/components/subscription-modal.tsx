@@ -68,10 +68,6 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <h3 className="text-xl font-bold gradient-text animate-gradient-xy-slow mb-2">
             Информация о подписке
           </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Подписка дает вам доступ к эксклюзивному контенту для{" "}
-            {title.toLowerCase().replace("подписка на ", "")}
-          </p>
 
           {isActive ? (
             <div className="bg-primary p-3 rounded-lg shadow-card-sm-light">
@@ -86,16 +82,6 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               <p className="text-sm">Длительность: 30 дней</p>
             </div>
           )}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h4 className="font-medium">Что включено:</h4>
-          <ul className="list-disc list-inside text-sm space-y-1">
-            <li>Доступ к эксклюзивным материалам</li>
-            <li>Персональные рекомендации</li>
-            <li>Дополнительные функции приложения</li>
-            <li>Обновления контента</li>
-          </ul>
         </div>
 
         <div className="flex justify-end mt-4">
