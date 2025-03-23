@@ -15,15 +15,22 @@ export const useSubscription = () => {
     try {
       setIsLoading(true);
       const res = await subscriptionsService.getPaimenLink(type);
-      window.Telegram.WebApp.openInvoice(res.data, (status) => {
-        if (status === "paid") {
-          toast.success("Подписка успешно добавлена");
-          closeModal();
-        }
-      });
+      try {
+        window.Telegram.WebApp.openInvoice(res.data, (status) => {
+          if (status === "paid") {
+            toast.success("Подписка успешно добавлена");
+            closeModal();
+          }
+        });
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Ошибка при открытии ссылки:", error);
+        toast.error("Ошибка при подключении подписки");
+        setIsLoading(false);
+      }
     } catch (error) {
       console.error("Ошибка при добавлении подписки:", error);
-    } finally {
+      toast.error("Ошибка при подключении подписки");
       setIsLoading(false);
     }
   };
