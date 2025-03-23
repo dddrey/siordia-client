@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { useSubscriptionModal } from "../store/use-subscription-modal";
 
 export const useSubscription = () => {
-  const { data: user } = useUser();
+  const { data: user, refetch } = useUser();
   const { closeModal } = useSubscriptionModal();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,6 +19,7 @@ export const useSubscription = () => {
         if (status === "paid") {
           toast.success("Подписка успешно добавлена");
           closeModal();
+          refetch();
         }
       });
     } catch (error) {
