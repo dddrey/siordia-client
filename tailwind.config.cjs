@@ -17,6 +17,14 @@ module.exports = {
           "0%": { transform: "scale(0.95)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
+        spin: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(-360deg)" },
+        },
         aurora: {
           from: {
             backgroundPosition: "50% 50%, 50% 50%",
@@ -48,6 +56,8 @@ module.exports = {
         "slide-in": "slide-in 0.3s ease-out",
         "fade-in": "fade-in 0.2s ease-out",
         "scale-in": "scale-in 0.2s ease-out",
+        spin: "spin 1s linear infinite",
+        "spin-slow": "spin-slow 1.5s linear infinite",
         aurora: "aurora 60s linear infinite",
         "gradient-xy": "gradient-xy 8s ease infinite",
         "gradient-xy-slow": "gradient-xy 12s ease infinite reverse",

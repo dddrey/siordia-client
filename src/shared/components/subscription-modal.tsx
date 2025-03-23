@@ -4,7 +4,6 @@ import { ContentType } from "../types/interfaces";
 import { useSubscription } from "../hooks/use-subscription";
 import useTelegram from "../hooks/use-telegram";
 import { toast } from "react-hot-toast";
-import { Loader } from "lucide-react";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -37,6 +36,15 @@ const getTypeIcon = (type: ContentType | null): string => {
       return "📱";
   }
 };
+
+const Spinner = () => (
+  <div className="flex justify-center items-center">
+    <div className="relative w-6 h-6">
+      <div className="absolute top-0 left-0 w-full h-full border-2 border-transparent border-t-white border-r-white rounded-full animate-spin"></div>
+      <div className="absolute top-0.5 left-0.5 w-5 h-5 border-2 border-transparent border-t-white border-r-white rounded-full animate-spin-slow opacity-75"></div>
+    </div>
+  </div>
+);
 
 const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
@@ -103,13 +111,13 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           </button>
           <button
             onClick={handleSubscribe}
-            className="px-4 py-2 bg-textPrimary text-white rounded-lg"
+            className="px-4 py-2 bg-textPrimary text-white rounded-lg min-w-[100px] flex justify-center items-center"
             disabled={isActive || isLoading}
           >
             {isActive ? (
               "Уже подключено"
             ) : isLoading ? (
-              <Loader className="animate-spin" />
+              <Spinner />
             ) : (
               "Подключить"
             )}
