@@ -3,9 +3,11 @@ import { ContentType } from "../types/interfaces";
 import { useState } from "react";
 import { useUser } from "./use-user";
 import { toast } from "react-hot-toast";
+import { useSubscriptionModal } from "../store/use-subscription-modal";
 
 export const useSubscription = () => {
   const { data: user } = useUser();
+  const { closeModal } = useSubscriptionModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const createPaymentLink = async (type: ContentType) => {
@@ -16,6 +18,7 @@ export const useSubscription = () => {
       window.Telegram.WebApp.openInvoice(res.data, (status) => {
         if (status === "paid") {
           toast.success("Подписка успешно добавлена");
+          closeModal();
         }
       });
     } catch (error) {

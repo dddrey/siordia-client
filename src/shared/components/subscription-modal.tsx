@@ -37,13 +37,9 @@ const getTypeIcon = (type: ContentType | null): string => {
   }
 };
 
+// Упрощенный спиннер
 const Spinner = () => (
-  <div className="flex justify-center items-center">
-    <div className="relative w-6 h-6">
-      <div className="absolute top-0 left-0 w-full h-full border-2 border-transparent border-t-white border-r-white rounded-full animate-spin"></div>
-      <div className="absolute top-0.5 left-0.5 w-5 h-5 border-2 border-transparent border-t-white border-r-white rounded-full animate-spin-slow opacity-75"></div>
-    </div>
-  </div>
+  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
 );
 
 const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
@@ -66,7 +62,6 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     setHapticFeedback();
     try {
       await createPaymentLink(type);
-      onClose();
     } catch (error) {
       console.error(error);
       toast.error("Ошибка при подключении подписки");
@@ -111,7 +106,7 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           </button>
           <button
             onClick={handleSubscribe}
-            className="px-4 py-2 bg-textPrimary text-white rounded-lg min-w-[100px] flex justify-center items-center"
+            className="px-4 py-2 bg-textPrimary text-white rounded-lg w-[120px] h-[40px] flex justify-center items-center"
             disabled={isActive || isLoading}
           >
             {isActive ? (

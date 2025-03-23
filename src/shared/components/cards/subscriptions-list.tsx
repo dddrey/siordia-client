@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import SubscriptionCard from "./subscription-card";
 import { ContentType } from "../../types/interfaces";
-import { useSubscriptionModal } from "../../hooks/use-subscription-modal";
+import { useSubscriptionModal } from "../../store/use-subscription-modal";
 import SubscriptionModal from "../subscription-modal";
 
 const SubscriptionsList = () => {
