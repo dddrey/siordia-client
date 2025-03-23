@@ -8,7 +8,8 @@ export const useSubscription = () => {
   const { data: user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleAddSubscription = async (type: ContentType) => {
+  const createPaymentLink = async (type: ContentType) => {
+    if (isLoading) return;
     try {
       setIsLoading(true);
       const res = await subscriptionsService.getPaimenLink(type);
@@ -50,7 +51,7 @@ export const useSubscription = () => {
   };
 
   return {
-    handleAddSubscription,
+    createPaymentLink,
     isLoading,
     getActiveSubscription,
   };
