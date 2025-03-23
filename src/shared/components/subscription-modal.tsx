@@ -3,6 +3,8 @@ import Modal from "./ui/modal";
 import { ContentType } from "../types/interfaces";
 import { useSubscription } from "../hooks/use-subscription";
 import useTelegram from "../hooks/use-telegram";
+import { toast } from "react-hot-toast";
+import { Loader } from "lucide-react";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -41,7 +43,8 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   onClose,
   type,
 }) => {
-  const { createPaymentLink, getActiveSubscription } = useSubscription();
+  const { createPaymentLink, getActiveSubscription, isLoading } =
+    useSubscription();
   const { setHapticFeedback } = useTelegram();
 
   if (!type) return null;
@@ -50,10 +53,16 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const title = getTypeTitle(type);
   const icon = getTypeIcon(type);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
+    if (isLoading) return;
     setHapticFeedback();
-    createPaymentLink(type);
-    onClose();
+    try {
+      await createPaymentLink(type);
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast.error("Ошибка при подключении подписки");
+    }
   };
 
   return (
@@ -86,6 +95,7 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         <div className="flex justify-end mt-4">
           <button
+            disabled={isLoading}
             onClick={onClose}
             className="px-4 py-2 mr-2 rounded-lg border border-border"
           >
@@ -94,9 +104,15 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <button
             onClick={handleSubscribe}
             className="px-4 py-2 bg-textPrimary text-white rounded-lg"
-            disabled={isActive}
+            disabled={isActive || isLoading}
           >
-            {isActive ? "Уже подключено" : "Подключить"}
+            {isActive ? (
+              "Уже подключено"
+            ) : isLoading ? (
+              <Loader className="animate-spin" />
+            ) : (
+              "Подключить"
+            )}
           </button>
         </div>
       </div>
