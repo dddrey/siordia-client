@@ -106,16 +106,10 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           </button>
           <button
             onClick={handleSubscribe}
-            className="px-4 py-2 bg-textPrimary text-white rounded-lg w-[120px] h-[40px] flex justify-center items-center"
-            disabled={isActive || isLoading}
+            className="px-4 py-2 bg-textPrimary text-white rounded-lg min-w-[120px] h-[40px] flex justify-center items-center"
+            disabled={isLoading}
           >
-            {isActive ? (
-              "Уже подключено"
-            ) : isLoading ? (
-              <Spinner />
-            ) : (
-              "Подключить"
-            )}
+            {isActive ? "Продлить" : isLoading ? <Spinner /> : "Подключить"}
           </button>
         </div>
       </div>
