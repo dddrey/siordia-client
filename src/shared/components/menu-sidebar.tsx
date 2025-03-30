@@ -42,9 +42,9 @@ const MenuSidebar = () => {
           <MenuLink onClick={close} text="Академия в Тбилиси" path="/school" />
         </div>
         <div className="flex items-center justify-center w-full gap-2 pb-4">
-          <InstagramIcon color={"#9CA3AF"} width={30} height={30} />
-          <span className="h-[3px] w-[3px] border border-[#9CA3AF] rounded-md"></span>
-          <TelegramIcon color={"#9CA3AF"} width={30} height={30} />
+          <InstagramIcon color={"#f6d061"} width={30} height={30} />
+          <span className="h-[3px] w-[3px] border border-[#f6d061] rounded-md"></span>
+          <TelegramIcon color={"#f6d061"} width={30} height={30} />
         </div>
       </div>
     </Sidebar>

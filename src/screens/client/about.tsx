@@ -27,7 +27,7 @@ const AboutScreen = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
+              className="bg-primary p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
             >
               <p className="text-lg font-semibold">
                 Я, Дима Сиордия — тренер с лицензией УЕФА ⚽️
@@ -41,7 +41,7 @@ const AboutScreen = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
+              className="bg-primary p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
             >
               <p className="text-lg font-semibold">Я не просто тренер 🤔</p>
               <p className="text-base">
@@ -55,7 +55,7 @@ const AboutScreen = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
+              className="bg-primary p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
             >
               <p className="text-base font-semibold">Вместе мы прокачаем: 💯</p>
               <ul className="space-y-2 list-disc list-inside">
@@ -70,7 +70,7 @@ const AboutScreen = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
+              className="bg-primary p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
             >
               <p className="font-semibold">Моя миссия: 💫</p>
               <p className="text-base">

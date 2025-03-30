@@ -20,7 +20,7 @@ const SubscriptionsList = () => {
             <SubscriptionCard
               title="Подписка на тренера"
               icon="🧑‍🏫"
-              price={5000}
+              price={1200}
               duration="30 дней"
               type={ContentType.COACH}
               onOpenModal={openModal}
@@ -35,7 +35,7 @@ const SubscriptionsList = () => {
             <SubscriptionCard
               title="Подписка на игрока"
               icon="🥇"
-              price={5000}
+              price={1200}
               duration="30 дней"
               type={ContentType.PLAYER}
               onOpenModal={openModal}
@@ -50,7 +50,7 @@ const SubscriptionsList = () => {
             <SubscriptionCard
               title="Подписка на родителя"
               icon="👩🏻‍🍼"
-              price={5000}
+              price={1200}
               duration="30 дней"
               type={ContentType.PARENT}
               onOpenModal={openModal}

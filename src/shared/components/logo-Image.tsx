@@ -31,7 +31,7 @@ const LogoImage = ({
         "relative shadow-card-sm-light flex items-center justify-center rounded-[12px] overflow-hidden",
         className,
         type === "small"
-          ? "min-h-[200px] border border-border border-opacity-65 "
+          ? "min-h-[200px] border border-border"
           : "min-h-[250px]"
       )}
     >
@@ -39,7 +39,7 @@ const LogoImage = ({
         <div className="absolute inset-0 flex flex-col items-center justify-center text-textPrimary p-4">
           <p
             className={cn(
-              "font-bold font-lalezar text-center gradient-text",
+              "font-bold font-lalezar text-center text-textPrimary",
               type === "small"
                 ? "text-[24px] leading-[22px]"
                 : "text-[36px] leading-[48px]"

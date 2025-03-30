@@ -1,7 +1,7 @@
 import { lessonsService } from "@/shared/services/lesson.service";
 import { useQuery } from "@tanstack/react-query";
-import ErrorComponent from "../../error";
-import Loader from "../../ui/loader";
+import ErrorComponent from "@/shared/components/error";
+import Loader from "@/shared/components/ui/loader";
 import { useEffect } from "react";
 
 interface VideoPlayerProps {
@@ -20,12 +20,17 @@ const VideoPlayer = ({ videoId }: VideoPlayerProps) => {
     }
   }, [data]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="w-full h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto object-cover flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   if (error || !data) return <ErrorComponent error={error} />;
 
   return (
     <video
-      className="w-[94%] h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto object-cover"
+      className="w-full h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto object-cover"
       controls
       playsInline
       src={data.videoUrl}

@@ -3,7 +3,6 @@ import TextContainer from "@/shared/components/text-container";
 import LessonHeader from "@/shared/components/layout/lesson/header";
 import ButtonsContainer from "@/shared/components/layout/lesson/buttons-container";
 import TaskList from "@/shared/components/layout/lesson/task-list";
-import VideoPlayer from "@/shared/components/layout/lesson/video-player";
 import { useLesson } from "@/shared/hooks/use-lessons";
 import { useParams, useSearchParams } from "react-router-dom";
 import LoadingOverview from "@/shared/components/loading-overview";
@@ -12,6 +11,7 @@ import { useEffect } from "react";
 import { ContentType } from "@/shared/types/interfaces";
 import { useHistoryCardStore } from "@/shared/store/use-history-card";
 import withAuth from "@/shared/components/hoc/auth";
+import VideoPlayer from "@/shared/components/video-player";
 const LessonScreen = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
@@ -49,7 +49,9 @@ const LessonScreen = () => {
         previousLessonId={previousLessonId}
         nextLessonId={nextLessonId}
       />
-      <VideoPlayer videoId={lesson.id} />
+      <div className="w-[94%] mx-auto">
+        <VideoPlayer videoId={lesson.id} />
+      </div>
       {lesson.description && (
         <div className="w-[94%] mt-2 mx-auto rounded-[12px] p-3 bg-primary shadow-card-sm-light mb-1 flex flex-col items-center">
           <TextContainer

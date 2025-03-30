@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       port: 5182,
       strictPort: true,
       allowedHosts: [
-        "graduated-disposition-effect-epa.trycloudflare.com",
+        "heater-nirvana-alt-schedules.trycloudflare.com",
         "siordia-client-production.up.railway.app",
         "skill-up-football.xyz",
       ],

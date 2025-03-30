@@ -70,20 +70,19 @@ module.exports = {
         "safe-area-content": "var(--tg-content-safe-area-inset-top)",
       },
       colors: {
-        primary: "#fff",
-        secondary: "#f4f4f5",
-        border: "#e4e4e7",
-        textPrimary: "#000",
+        primary: "#272e4a",
+        secondary: "#3e587e",
+        border: "#f6d061",
+        textPrimary: "#f6d061",
         textSecondary: "#ccc",
-        gradientText: "linear-gradient(45deg, #ff0066, #cc00ff, #6600cc)",
       },
       boxShadow: {
         "card-light":
-          "0 0 0 1px rgba(0,0,0,.03), 0 2px 4px rgba(0,0,0,.05), 0 12px 24px rgba(0,0,0,.05)",
+          "0 0 0 2px rgba(0,0,0,.03), 0 2px 4px rgba(0,0,0,.05), 0 12px 24px rgba(0,0,0,.05)",
         "card-dark":
           "0 0 0 1px rgba(255,255,255,.05), 0 2px 4px rgba(0,0,0,.2), 0 12px 24px rgba(0,0,0,.2)",
         "card-sm-light":
-          "0 0 0 1px rgba(0,0,0,.03), 0 1px 2px rgba(0,0,0,.05), 0 4px 8px rgba(0,0,0,.05)",
+          "0 0 0 2px rgba(0,0,0,.03), 0 1px 2px rgba(0,0,0,.05), 0 4px 8px rgba(0,0,0,.05)",
         "card-sm-dark":
           "0 0 0 1px rgba(255,255,255,.05), 0 1px 2px rgba(0,0,0,.1), 0 4px 8px rgba(0,0,0,.1)",
       },

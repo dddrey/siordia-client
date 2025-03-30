@@ -49,7 +49,7 @@ const FoldersScreen = () => {
           className="bg-primary border border-border p-2 rounded-[10px]"
           onClick={setHapticFeedback}
         >
-          <PlusIcon className="w-4 h-4 text-gray-400" />
+          <PlusIcon className="w-4 h-4 text-textPrimary" />
         </Link>
       </div>
       <ItemsList

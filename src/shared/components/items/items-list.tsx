@@ -71,7 +71,7 @@ const ItemsList = ({
       </div>
       {items.length === 0 && (
         <Fragment>
-          <p className="text-[18px] font-medium mx-auto mt-10 mb-2 text-textSecondary">
+          <p className="text-[18px] font-medium mx-auto mt-10 mb-2 text-textPrimary/70">
             Нет элементов
           </p>
         </Fragment>

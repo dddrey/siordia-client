@@ -19,7 +19,7 @@ const Card = ({ item }: CardProps) => {
   const isFolder = "topics" in item;
   return (
     <div>
-      <div className="relative w-[220px] bg-secondary border border-border rounded-[12px] overflow-hidden px-2 pt-[8px] pb-[6px]">
+      <div className="relative w-[220px] bg-primary border border-border rounded-[12px] overflow-hidden px-2 pt-[8px] pb-[6px]">
         <div className="absolute top-2 left-1/2 -translate-x-1/2  w-full max-w-[212px] z-[5] flex justify-between items-center">
           <button
             onClick={handleClickSubscribe}
@@ -33,10 +33,10 @@ const Card = ({ item }: CardProps) => {
               : `Уроков: ${(item as ITopic).lessons.length}`}
           </button>
         </div>
-        <div className="w-full max-w-[200px] mx-auto rounded-[12px] overflow-hidden image-container">
+        <div className="w-full max-w-[200px] mx-auto rounded-[12px] overflow-hidden">
           <LogoImage type="small" title={"SKILL UP"} />
         </div>
-        <div className="w-full h-[100px] rounded-lg bg-secondary bg-opacity-90 flex flex-col justify-center items-center">
+        <div className="w-full h-[100px] rounded-lg flex flex-col justify-center items-center">
           <p className="text-textPrimary text-[18px] font-[600] mt-1">
             {item.name}
           </p>

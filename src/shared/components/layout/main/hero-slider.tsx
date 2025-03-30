@@ -62,7 +62,7 @@ export const HeroSlider = () => {
                 <Link
                   to={slide.link}
                   onClick={setHapticFeedback}
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 font-semibold text-textPrimary bg-primary border border-border rounded-[14px] px-5 py-3"
+                  className="absolute bottom-6 left-1/2 -translate-x-1/2 font-semibold text-textPrimary bg-primary rounded-[14px] px-5 py-3"
                 >
                   {slide.linkText}
                 </Link>

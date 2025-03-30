@@ -70,14 +70,16 @@ const Modal: React.FC<ModalProps> = ({
       >
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-4 border-b border-border">
-            {title && <h3 className="text-lg font-medium">{title}</h3>}
+            {title && (
+              <h3 className="text-lg font-medium text-textPrimary">{title}</h3>
+            )}
             {showCloseButton && (
               <button
                 onClick={handleCloseClick}
                 className="p-1 rounded-full hover:bg-secondary transition-colors"
                 aria-label="Закрыть"
               >
-                <X size={20} />
+                <X size={20} className="text-textPrimary" />
               </button>
             )}
           </div>

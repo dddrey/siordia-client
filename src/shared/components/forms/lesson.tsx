@@ -12,7 +12,7 @@ import { useAdminSidebarStore } from "../../store/use-admin-sidebar-store";
 import FormTaskList from "./task-list";
 import useTelegram from "@/shared/hooks/use-telegram";
 import FileUpload from "../ui/file-upload";
-import VideoPlayer from "../layout/lesson/video-player";
+import VideoPlayer from "../video-player";
 
 interface LessonFormProps {
   lessonId?: string;
@@ -113,7 +113,7 @@ const LessonForm = ({
       </div>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="relative flex flex-col gap-4 mx-auto w-full max-w-[94%]"
+        className="relative flex flex-col gap-4 mx-auto w-full max-w-[94%] mt-safe-area pt-[30px] mb-[30px]"
       >
         <AnimatePresence mode="wait">
           {view === "settings" ? (

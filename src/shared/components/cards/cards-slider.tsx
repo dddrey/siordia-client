@@ -20,7 +20,7 @@ const CardsSlider = ({
   return (
     <section className="w-full bg-primary rounded-xl shadow-card-light py-[10px]">
       <h2 className="text-[20px] pl-[10px] font-bold mb-[10px]">
-        <span className="gradient-text">{title} </span>
+        <span className="text-textPrimary">{title} </span>
         <span>{icon}</span>
       </h2>
 
@@ -44,7 +44,7 @@ const CardsSlider = ({
         </div>
       )}
       {items.length === 0 && !isLoading && !isError && (
-        <div className="mx-auto text-center text-[18px] font-medium py-[30px] text-textSecondary">
+        <div className="mx-auto text-center text-[18px] font-medium py-[30px] text-textPrimary/70">
           Нет элементов
         </div>
       )}

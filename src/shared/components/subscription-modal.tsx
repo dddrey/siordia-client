@@ -76,20 +76,20 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       className="w-[90%]"
     >
       <div className="flex flex-col gap-4">
-        <div className="bg-secondary p-4 rounded-lg">
-          <h3 className="text-xl font-bold gradient-text animate-gradient-xy-slow mb-2">
+        <div className="bg-primary p-4 rounded-lg">
+          <h3 className="text-xl font-bold text-textPrimary mb-4">
             Информация о подписке
           </h3>
 
           {isActive ? (
-            <div className="bg-primary p-3 rounded-lg shadow-card-sm-light">
-              <p className="text-green-600 font-medium">Подписка активна</p>
+            <div className="bg-primary text-textPrimary border border-border rounded-[12px] p-3">
+              <p className="font-medium">Подписка активна</p>
               <p className="text-sm">Действует до: {endDate}</p>
             </div>
           ) : (
-            <div className="bg-primary p-3 rounded-lg shadow-card-sm-light">
+            <div className="bg-primary text-textPrimary border border-border rounded-[12px] p-3">
               <p className="font-medium">
-                Стоимость: <span className="gradient-text">5000 ₽</span>
+                Стоимость: <span className="text-textPrimary">1200 ⭐</span>
               </p>
               <p className="text-sm">Длительность: 30 дней</p>
             </div>
@@ -100,7 +100,7 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <button
             disabled={isLoading}
             onClick={onClose}
-            className="px-4 py-2 mr-2 rounded-lg border border-border"
+            className="px-4 py-2 mr-2 rounded-lg border text-textPrimary border-border"
           >
             Отмена
           </button>

@@ -33,8 +33,8 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
   return (
     <div className="p-3 h-[25vh] rounded-lg flex flex-col justify-between bg-primary text-textPrimary shadow-card-light">
       <div className="mb-4 w-full flex justify-between items-center">
-        <p className="text-[20px] font-semibold ">
-          <span className="gradient-text">{title}</span>
+        <p className="text-[20px] font-semibold flex gap-1">
+          <span className="text-textPrimary">{title}</span>
           <span>{icon}</span>
         </p>
         <p className="text-[17px] font-semibold text-textPrimary">
@@ -43,15 +43,15 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
       </div>
       <div className="flex w-full items-end">
         <div className="flex w-full items-end gap-1">
-          <p className="text-[24px] font-bold gradient-text animate-gradient-xy-slow">
-            {price.toLocaleString()} ₽
+          <p className="text-[24px] font-bold text-textPrimary">
+            {price.toLocaleString()} ⭐
           </p>
         </div>
         <button
           onClick={handleClick}
-          className="text-[16px] bg-textPrimary p-[10px] text-white rounded-full border border-border"
+          className="text-[16px] bg-primary p-[10px] text-textPrimary rounded-full border border-border"
         >
-          <ChevronRight color="white" size={18} strokeWidth={1.2} />
+          <ChevronRight size={18} strokeWidth={1.2} />
         </button>
       </div>
     </div>

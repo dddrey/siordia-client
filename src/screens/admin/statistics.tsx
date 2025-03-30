@@ -8,8 +8,6 @@ import LoadingOverview from "@/shared/components/loading-overview";
 const StatisticsScreen = () => {
   const { data, isLoading, error } = useStatistics();
 
-  console.log(data);
-
   if (isLoading) return <LoadingOverview />;
 
   if (error || !data) {
@@ -29,7 +27,7 @@ const StatisticsScreen = () => {
 
   return (
     <ContentWrapper className="pt-safe-area" withFooter={false}>
-      <section className="flex flex-col gap-2 mx-auto w-[94%]">
+      <section className="flex flex-col gap-2 mx-auto w-[94%] text-textPrimary">
         <StatCard
           title="Пользователи"
           value={data.overview.totalUsers}
@@ -67,7 +65,7 @@ const StatisticsScreen = () => {
         />
       </section>
 
-      <section className="bg-primary shadow-card-sm-light rounded-[10px] p-4 mt-3 w-[94%] mx-auto">
+      <section className="bg-primary text-textPrimary shadow-card-sm-light rounded-[10px] p-4 mt-3 w-[94%] mx-auto">
         <h3 className="text-lg font-semibold mb-3">Популярные уроки</h3>
         <div className="space-y-2">
           {data.topLessons.length > 0 ? (
@@ -80,7 +78,7 @@ const StatisticsScreen = () => {
                   <p className="font-medium text-[16px]">{lesson.name}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="gradient-text font-semibold text-[20px]">
+                  <span className="text-textPrimary font-semibold text-[20px]">
                     {lesson.views}
                   </span>
                   <Eye size={20} />
@@ -88,7 +86,7 @@ const StatisticsScreen = () => {
               </div>
             ))
           ) : (
-            <p className="text-[18px] font-medium text-gray-500 text-center my-10">
+            <p className="text-[18px] font-medium text-textPrimary/70 text-center my-10">
               Нет популярных уроков
             </p>
           )}
@@ -108,11 +106,9 @@ const StatCard = ({ title, value, icon }: StatCardProps) => (
   <div className="bg-primary flex justify-between items-center shadow-card-sm-light rounded-[10px] p-3">
     <div className="flex items-center gap-2">
       {icon}
-      <span className="text-[16px] font-medium">{title}</span>
+      <span className="text-[16px] font-medium text-textPrimary">{title}</span>
     </div>
-    <p className="text-3xl font-bold gradient-text animate-gradient-xy">
-      {value}
-    </p>
+    <p className="text-3xl font-bold text-textPrimary">{value}</p>
   </div>
 );
 

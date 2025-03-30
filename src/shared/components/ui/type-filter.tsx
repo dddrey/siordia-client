@@ -20,7 +20,7 @@ const TypeFilter = ({ selectedType, onChange }: TypeFilterProps) => {
           "px-1.5 py-1 rounded-[10px] text-[12px] font-medium border transition-colors",
           !selectedType
             ? "bg-primary text-textPrimary border-border"
-            : "border-border text-gray-400 hover:bg-border"
+            : "border-border/60 text-textPrimary/60"
         )}
       >
         Все
@@ -36,7 +36,7 @@ const TypeFilter = ({ selectedType, onChange }: TypeFilterProps) => {
             "px-1.5 py-1 rounded-[10px] text-[12px] font-medium border transition-colors",
             selectedType === type
               ? "bg-primary text-textPrimary border-border"
-              : "border-border text-gray-400 hover:bg-border"
+              : "border-border/60 text-textPrimary/60"
           )}
         >
           {ContentTypeLabels[type]}

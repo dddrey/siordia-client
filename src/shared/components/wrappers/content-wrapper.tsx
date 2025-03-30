@@ -17,7 +17,9 @@ const ContentWrapper = ({
 }: ContentWrapperProps) => {
   return (
     <Layout withLayout={withLayout} withFooter={withFooter}>
-      <main className={cn("min-h-screen ", className)}>{children}</main>
+      <main className={cn("min-h-screen bg-primary", className)}>
+        {children}
+      </main>
     </Layout>
   );
 };

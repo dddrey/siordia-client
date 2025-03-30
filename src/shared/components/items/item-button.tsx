@@ -13,11 +13,7 @@ const ItemButton = ({ hasAccess = true }: ItemButtonProps) => {
     }
 
     return (
-      <ChevronRight
-        strokeWidth={2}
-        size={16}
-        className="text-black text-opacity-30"
-      />
+      <ChevronRight strokeWidth={2} size={16} className="text-textPrimary" />
     );
   };
 
@@ -26,7 +22,7 @@ const ItemButton = ({ hasAccess = true }: ItemButtonProps) => {
       <button
         className={cn(
           "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-          "bg-secondary border border-border p-2 rounded-full text-[12px] font-medium",
+          "bg-primary border border-border p-2 rounded-full text-[12px] font-medium",
           "transition-colors duration-200"
         )}
       >
