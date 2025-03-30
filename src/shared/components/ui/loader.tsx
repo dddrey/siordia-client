@@ -1,6 +1,13 @@
-const Loader = () => {
+interface LoaderProps {
+  className?: string;
+  size?: number;
+}
+
+const Loader = ({ className, size = 4 }: LoaderProps) => {
   return (
-    <div className="w-4 h-4 border-2 border-textPrimary border-t-transparent rounded-full animate-spin"></div>
+    <div
+      className={`w-${size} h-${size} border-2 border-textPrimary border-t-transparent rounded-full animate-spin ${className}`}
+    ></div>
   );
 };
 

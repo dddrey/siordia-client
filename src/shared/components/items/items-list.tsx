@@ -1,5 +1,5 @@
 import { IFolder, ILesson, ITopic } from "../../types/interfaces";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import FolderItem from "./item";
 import ErrorComponent from "../error";
 import Skeleton from "../ui/skeleton";
@@ -15,6 +15,7 @@ interface ItemsListProps {
   onClick?: (id: string) => void;
   type?: "default" | "permission";
   hasAccess?: boolean;
+  limit?: number;
 }
 
 const ItemsList = ({
@@ -28,7 +29,17 @@ const ItemsList = ({
   onClick,
   params,
   hasAccess = false,
+  limit = 10,
 }: ItemsListProps) => {
+  const [displayCount, setDisplayCount] = useState(limit);
+  const hasMoreItems = items.length > displayCount;
+
+  const displayedItems = items.slice(0, displayCount);
+
+  const handleShowMore = () => {
+    setDisplayCount((prev) => prev + limit);
+  };
+
   if (isLoading) {
     return (
       <section className="w-full h-full flex flex-col gap-[4px] mt-4">
@@ -76,7 +87,7 @@ const ItemsList = ({
           </p>
         </Fragment>
       )}
-      {items.map((item) => {
+      {displayedItems.map((item) => {
         const hasSubscriptionField = "isSubscriptionRequired" in item;
         return (
           <FolderItem
@@ -94,6 +105,30 @@ const ItemsList = ({
           />
         );
       })}
+
+      {hasMoreItems && (
+        <button
+          onClick={handleShowMore}
+          className="w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-center gap-2"
+        >
+          <p className="text-[16px] font-medium text-textPrimary">
+            Показать еще
+          </p>
+          <svg
+            className="w-5 h-5 text-textPrimary"
+            fill="none"
+            strokeWidth={2}
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      )}
     </section>
   );
 };
