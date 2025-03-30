@@ -10,7 +10,7 @@ const SubscriptionsList = () => {
 
   return (
     <>
-      <div className="bg-primary w-full p-2 rounded-[12px] text-textPrimary">
+      <div className="w-full p-2 rounded-[12px] text-textPrimary">
         <div className="flex flex-col gap-3">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

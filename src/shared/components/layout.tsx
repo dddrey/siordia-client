@@ -20,7 +20,7 @@ const Layout = ({
   if (!withLayout) return children;
 
   return (
-    <div className="max-w-[500px] mx-auto bg-primary">
+    <div className="max-w-[500px] mx-auto">
       <Header />
       {children}
       {withFooter && <Footer />}
