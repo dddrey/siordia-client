@@ -17,8 +17,8 @@ export const TelegramWrapper = ({
     try {
       webAppState.disableVerticalSwipes();
       webAppState.requestFullscreen();
-      webAppState.setBackgroundColor("#fff");
-      webAppState.setHeaderColor("#fff");
+      webAppState.setBackgroundColor("#1a1f33");
+      webAppState.setHeaderColor("#1a1f33");
       webAppState.lockOrientation();
     } catch (error) {
       console.log("err", error);
