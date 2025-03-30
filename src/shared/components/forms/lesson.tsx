@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Settings, ListTodo } from "lucide-react";
 import FormField from "../ui/form-field";
 import FormButton from "../ui/form-button";
@@ -11,8 +11,11 @@ import { useSidebarStore } from "../../store/use-sidebar-store";
 import { useAdminSidebarStore } from "../../store/use-admin-sidebar-store";
 import FormTaskList from "./task-list";
 import useTelegram from "@/shared/hooks/use-telegram";
+import FileUpload from "../ui/file-upload";
+import VideoPlayer from "../layout/lesson/video-player";
 
 interface LessonFormProps {
+  lessonId?: string;
   lesson?: LessonFormValues;
   onSubmit: (data: LessonFormValues) => Promise<void>;
   isLoading?: boolean;
@@ -26,29 +29,46 @@ const LessonForm = ({
   onSubmit,
   isLoading = false,
   children,
+  lessonId,
 }: LessonFormProps) => {
   const [view, setView] = useState<FormView>("settings");
   const { isOpen } = useSidebarStore();
   const { isOpen: isOpenAdmin } = useAdminSidebarStore();
   const { setHapticFeedback } = useTelegram();
 
+  console.log(
+    "Initial isSubscriptionRequired:",
+    lesson?.isSubscriptionRequired
+  );
+
   const {
     register,
     control,
     handleSubmit,
     formState: { errors, isSubmitting, isDirty, isValid },
+    setValue,
+    watch,
+    clearErrors,
+    trigger,
   } = useForm<LessonFormValues>({
     resolver: zodResolver(lessonSchema),
     defaultValues: {
       name: lesson?.name || "",
       description: lesson?.description || "",
       about: lesson?.about || "",
-      video: lesson?.video || "",
+      video: "",
       tasks: lesson?.tasks || [],
-      isSubscriptionRequired: lesson?.isSubscriptionRequired || false,
+      isSubscriptionRequired: lesson?.isSubscriptionRequired ?? true,
     },
     mode: "onChange",
   });
+
+  useEffect(() => {
+    console.log(
+      "Form isSubscriptionRequired value:",
+      watch("isSubscriptionRequired")
+    );
+  }, [watch("isSubscriptionRequired")]);
 
   const handleViewChange = (view: FormView) => {
     setView(view);
@@ -135,15 +155,37 @@ const LessonForm = ({
                 disabled={isLoading || isSubmitting}
               />
 
-              <FormField<LessonFormValues>
-                id="video"
-                label="Видео"
-                placeholder="Введите URL видео"
-                register={register}
-                error={errors.video}
-                required
-                disabled={isLoading || isSubmitting}
-              />
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Видео урока
+                </label>
+                {lessonId && !watch("video") && (
+                  <VideoPlayer videoId={lessonId} />
+                )}
+                <FileUpload
+                  accept="video"
+                  onChange={(file) => {
+                    setValue("video", file, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    });
+                    trigger("video");
+                  }}
+                  onRemove={async () => {
+                    setValue("video", "", {
+                      shouldValidate: false,
+                      shouldDirty: true,
+                    });
+                    clearErrors("video");
+                    await trigger("video");
+                  }}
+                  value={watch("video")}
+                  disabled={isLoading || isSubmitting}
+                />
+                {errors.video && (
+                  <p className="text-sm text-red-500">{errors.video.message}</p>
+                )}
+              </div>
 
               <FormCheckbox<LessonFormValues>
                 id="isSubscriptionRequired"
@@ -151,6 +193,7 @@ const LessonForm = ({
                 register={register}
                 error={errors.isSubscriptionRequired}
                 disabled={isLoading || isSubmitting}
+                watch={watch}
               />
             </motion.div>
           ) : (

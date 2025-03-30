@@ -15,10 +15,26 @@ const LessonCreateScreen = () => {
 
   const handleSubmit = async (data: LessonFormValues) => {
     if (!topicId) return;
-    createLesson({
-      topicId: topicId,
-      lesson: data,
+
+    const formData = new FormData();
+    formData.append("topicId", topicId);
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("about", data.about);
+    formData.append(
+      "isSubscriptionRequired",
+      String(data.isSubscriptionRequired)
+    );
+
+    if (data.video instanceof File) {
+      formData.append("video", data.video);
+    }
+
+    data.tasks.forEach((task, index) => {
+      formData.append(`tasks[${index}]`, JSON.stringify(task));
     });
+
+    createLesson(formData);
   };
 
   if (isPending) return <LoadingOverview />;

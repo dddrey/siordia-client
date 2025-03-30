@@ -13,7 +13,7 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
 import withAdmin from "@/shared/components/hoc/admin";
-
+import { useEffect } from "react";
 const LessonUpdateScreen = () => {
   const { id } = useParams();
   const { data: lesson, isLoading, error } = useLesson(id as string);
@@ -21,10 +21,35 @@ const LessonUpdateScreen = () => {
   const { mutate: deleteLesson, isPending: isPendingDelete } =
     useDeleteLesson();
 
+  useEffect(() => {
+    console.log(typeof lesson?.lesson.isSubscriptionRequired);
+  }, [lesson]);
+
   const handleSubmit = async (data: LessonFormValues) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("about", data.about);
+    formData.append(
+      "isSubscriptionRequired",
+      String(data.isSubscriptionRequired)
+    );
+
+    // Если video это File, добавляем его в formData
+    if (data.video instanceof File) {
+      formData.append("video", data.video);
+    } else if (typeof data.video === "string" && data.video) {
+      // Если video это строка (videoId), добавляем его как есть
+      formData.append("videoId", data.video);
+    }
+
+    data.tasks.forEach((task, index) => {
+      formData.append(`tasks[${index}]`, JSON.stringify(task));
+    });
+
     updateLesson({
       id: id as string,
-      lesson: data,
+      lesson: formData,
     });
   };
 
@@ -47,7 +72,18 @@ const LessonUpdateScreen = () => {
 
   return (
     <ContentWrapper className="flex flex-col justify-center" withFooter={false}>
-      <LessonForm onSubmit={handleSubmit} lesson={lesson.lesson}>
+      <LessonForm
+        onSubmit={handleSubmit}
+        lesson={{
+          name: lesson.lesson.name,
+          description: lesson.lesson.description,
+          about: lesson.lesson.about,
+          video: lesson.lesson.videoId,
+          tasks: lesson.lesson.tasks,
+          isSubscriptionRequired: lesson.lesson.isSubscriptionRequired,
+        }}
+        lessonId={lesson.lesson.id}
+      >
         <FormButton
           type="button"
           onClick={handleDelete}

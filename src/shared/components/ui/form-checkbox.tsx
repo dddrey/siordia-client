@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useTelegram from "@/shared/hooks/use-telegram";
 import {
   UseFormRegister,
   FieldError,
   Path,
   FieldValues,
+  UseFormWatch,
 } from "react-hook-form";
 
 interface FormCheckboxProps<T extends FieldValues> {
@@ -14,6 +15,7 @@ interface FormCheckboxProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   error?: FieldError;
   required?: boolean;
+  watch: UseFormWatch<T>;
 }
 
 const FormCheckbox = <T extends FieldValues>({
@@ -23,13 +25,18 @@ const FormCheckbox = <T extends FieldValues>({
   register,
   error,
   required = false,
+  watch,
 }: FormCheckboxProps<T>) => {
   const [isChecked, setIsChecked] = useState(false);
   const { setHapticFeedback } = useTelegram();
 
+  useEffect(() => {
+    const value = watch(id);
+    setIsChecked(!!value);
+  }, [watch, id]);
+
   const handleClick = () => {
     if (!disabled) {
-      setIsChecked(!isChecked);
       setHapticFeedback();
     }
   };

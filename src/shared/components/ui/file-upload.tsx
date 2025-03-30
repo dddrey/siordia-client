@@ -1,14 +1,13 @@
 import { UploadCloud, X, Image as ImageIcon, Video } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { ReviewFileType } from "@/schema/review.schema";
 import { cn } from "../../utils/cn";
 
 interface FileUploadProps {
-  onChange: (file: { type: ReviewFileType; url: string }) => void;
-  value?: { type: ReviewFileType; url: string };
+  onChange: (file: File) => void;
+  value?: string | File;
   onRemove: () => void;
-  accept: ReviewFileType;
+  accept: "video" | "image";
   disabled?: boolean;
 }
 
@@ -26,46 +25,40 @@ const FileUpload = ({
       try {
         setLoading(true);
         const file = acceptedFiles[0];
-        const url = URL.createObjectURL(file);
-
-        onChange({
-          type: accept,
-          url,
-        });
+        onChange(file);
       } catch (error) {
         console.error("Error uploading file:", error);
       } finally {
         setLoading(false);
       }
     },
-    [onChange, accept]
+    [onChange]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "image/*": accept === ReviewFileType.IMAGE ? [] : [],
-      "video/*": accept === ReviewFileType.VIDEO ? [] : [],
+      "video/*": accept === "video" ? [] : [],
+      "image/*": accept === "image" ? [] : [],
     },
     disabled: disabled || loading,
     maxFiles: 1,
-    maxSize:
-      accept === ReviewFileType.IMAGE ? 5 * 1024 * 1024 : 100 * 1024 * 1024, // 5MB для фото, 100MB для видео
+    maxSize: accept === "video" ? 100 * 1024 * 1024 : 5 * 1024 * 1024, // 100MB для видео, 5MB для фото
   });
 
   // Если файл уже загружен, показываем превью
-  if (value?.url) {
+  if (value) {
     return (
       <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-        {value.type === ReviewFileType.IMAGE ? (
+        {accept === "image" ? (
           <img
-            src={value.url}
+            src={value instanceof File ? URL.createObjectURL(value) : value}
             alt="Upload"
             className="w-full h-full object-cover"
           />
         ) : (
           <video
-            src={value.url}
+            src={value instanceof File ? URL.createObjectURL(value) : value}
             className="w-full h-full object-cover"
             controls
           />
@@ -75,7 +68,7 @@ const FileUpload = ({
           className="absolute top-2 right-2 p-1 rounded-full bg-black/50 hover:bg-black/75 transition"
           type="button"
         >
-          <X className="h-4 w-4" />
+          <X className="h-4 w-4 text-white" />
         </button>
       </div>
     );
@@ -100,7 +93,7 @@ const FileUpload = ({
         <div className="p-4 rounded-full bg-gray-100">
           {loading ? (
             <UploadCloud className="h-6 w-6 animate-bounce" />
-          ) : accept === ReviewFileType.IMAGE ? (
+          ) : accept === "image" ? (
             <ImageIcon className="h-6 w-6" />
           ) : (
             <Video className="h-6 w-6" />
@@ -112,16 +105,13 @@ const FileUpload = ({
               "Загрузка..."
             ) : (
               <>
-                Перетащите{" "}
-                {accept === ReviewFileType.IMAGE ? "изображение" : "видео"} сюда
+                Перетащите {accept === "image" ? "изображение" : "видео"} сюда
                 или <span className="text-blue-500">выберите файл</span>
               </>
             )}
           </p>
           <p className="text-xs text-gray-500 mt-1">
-            {accept === ReviewFileType.IMAGE
-              ? "PNG, JPG до 5MB"
-              : "MP4, WebM до 100MB"}
+            {accept === "image" ? "PNG, JPG до 5MB" : "MP4, WebM до 100MB"}
           </p>
         </div>
       </div>

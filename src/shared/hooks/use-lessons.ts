@@ -1,4 +1,3 @@
-import { LessonFormValues } from "@/schema/lesson.schema";
 import { lessonsService } from "../services/lesson.service";
 import { ContentType } from "../types/interfaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -33,8 +32,7 @@ export const useCreateLesson = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (data: { topicId: string; lesson: LessonFormValues }) =>
-      lessonsService.createLesson(data.topicId, data.lesson),
+    mutationFn: (formData: FormData) => lessonsService.createLesson(formData),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [LESSONS_QUERY_KEY],
@@ -55,7 +53,7 @@ export const useUpdateLesson = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (data: { id: string; lesson: LessonFormValues }) =>
+    mutationFn: (data: { id: string; lesson: FormData }) =>
       lessonsService.updateLesson(data.id, data.lesson),
     onSuccess: async (_, { id }) => {
       await queryClient.invalidateQueries({

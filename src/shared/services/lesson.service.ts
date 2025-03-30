@@ -1,6 +1,5 @@
 import { ContentType, ILesson } from "../types/interfaces";
 import api from "../utils/axios-instance";
-import { LessonFormValues } from "@/schema/lesson.schema";
 import { GetLesson } from "../types/response";
 
 class LessonsService {
@@ -22,24 +21,29 @@ class LessonsService {
     return response.data;
   }
 
-  async createLesson(
-    topicId: string,
-    lesson: LessonFormValues
-  ): Promise<ILesson<"full">> {
-    const response = await api.post(`/lessons`, { ...lesson, topicId });
+  async createLesson(formData: FormData): Promise<ILesson<"full">> {
+    console.log(formData.get("video"));
+    const response = await api.post(`/lessons`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response.data);
     return response.data;
   }
 
-  async updateLesson(
-    id: string,
-    lesson: LessonFormValues
-  ): Promise<ILesson<"full">> {
+  async updateLesson(id: string, lesson: FormData): Promise<ILesson<"full">> {
     const response = await api.put(`/lessons/${id}`, lesson);
     return response.data;
   }
 
   async deleteLesson(id: string): Promise<void> {
     await api.delete(`/lessons/${id}`);
+  }
+
+  async getVideoUrl(id: string): Promise<{ videoUrl: string }> {
+    const response = await api.get(`/lessons/${id}/video-url`);
+    return response.data;
   }
 }
 

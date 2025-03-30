@@ -35,7 +35,7 @@ export interface ILesson<T extends "preview" | "full"> {
   name: string;
   number: number;
   isCompleted: boolean;
-  video: T extends "full" ? string : never;
+  videoId: T extends "full" ? string : never;
   about: T extends "full" ? string : never;
   description: T extends "full" ? string : never;
   tasks: T extends "full" ? ITask[] : never;
