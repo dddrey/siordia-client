@@ -39,8 +39,12 @@ const MenuHistoryCard = ({
         <p className="text-[10px] text-gray-500">{description}</p>
       </div>
       <div>
-        <div className="bg-secondary text-black text-opacity-30 rounded-full p-2 border border-border">
-          <ChevronRight size={16} strokeWidth={2} />
+        <div className=" rounded-full p-2 border border-border">
+          <ChevronRight
+            size={16}
+            strokeWidth={2}
+            className="text-textPrimary"
+          />
         </div>
       </div>
     </Link>

@@ -35,8 +35,8 @@ const HistoryCard = () => {
         <p className="text-textPrimary text-[14px]">{lesson.name}</p>
         <p className="text-gray-400 text-[10px]">Урок {lesson.number}.</p>
       </div>
-      <div className="flex items-center justify-center bg-secondary text-black text-opacity-30 rounded-full p-2 border border-border">
-        <ChevronRight size={16} strokeWidth={2} />
+      <div className="flex items-center justify-center rounded-full p-2 border border-border">
+        <ChevronRight size={16} strokeWidth={2} className="text-textPrimary" />
       </div>
     </motion.div>
   );
