@@ -57,9 +57,13 @@ const ReviewForm = ({ onSubmit, isLoading = false }: ReviewFormProps) => {
           {/* Загрузка изображения */}
           <FileUpload
             accept={ReviewFileType.IMAGE}
-            value={file?.type === ReviewFileType.IMAGE ? file : undefined}
+            value={undefined}
             onChange={(file) =>
-              setValue("file", file, { shouldValidate: true })
+              setValue(
+                "file",
+                { file, type: ReviewFileType.IMAGE },
+                { shouldValidate: true }
+              )
             }
             onRemove={() =>
               setValue("file", undefined, { shouldValidate: true })
@@ -72,9 +76,13 @@ const ReviewForm = ({ onSubmit, isLoading = false }: ReviewFormProps) => {
           {/* Загрузка видео */}
           <FileUpload
             accept={ReviewFileType.VIDEO}
-            value={file?.type === ReviewFileType.VIDEO ? file : undefined}
+            value={undefined}
             onChange={(file) =>
-              setValue("file", file, { shouldValidate: true })
+              setValue(
+                "file",
+                { file, type: ReviewFileType.VIDEO },
+                { shouldValidate: true }
+              )
             }
             onRemove={() =>
               setValue("file", undefined, { shouldValidate: true })
