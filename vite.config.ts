@@ -29,5 +29,17 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    preview: {
+      port: 8080,
+      host: "0.0.0.0",
+      strictPort: true,
+      allowedHosts: [
+        "localhost",
+        "127.0.0.1",
+        "graduated-disposition-effect-epa.trycloudflare.com",
+        "siordia-client-production.up.railway.app",
+        "skill-up-football.xyz",
+      ],
+    },
   };
 });
