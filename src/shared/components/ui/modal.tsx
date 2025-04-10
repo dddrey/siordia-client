@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { X } from "lucide-react";
 import { createPortal } from "react-dom";
 import useTelegram from "../../hooks/use-telegram";
 
@@ -16,10 +15,8 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
-  title,
   children,
   className = "",
-  showCloseButton = true,
   closeOnBackdropClick = true,
 }) => {
   const { setHapticFeedback } = useTelegram();
@@ -52,11 +49,6 @@ const Modal: React.FC<ModalProps> = ({
     }
   };
 
-  const handleCloseClick = () => {
-    setHapticFeedback();
-    onClose();
-  };
-
   if (!isOpen) return null;
 
   return createPortal(
@@ -68,22 +60,6 @@ const Modal: React.FC<ModalProps> = ({
         ref={modalRef}
         className={`animate-slide-in bg-primary shadow-card-light dark:shadow-card-dark rounded-lg max-w-[90%] max-h-[90vh] overflow-auto ${className}`}
       >
-        {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-4 border-b border-border">
-            {title && (
-              <h3 className="text-lg font-medium text-textPrimary">{title}</h3>
-            )}
-            {showCloseButton && (
-              <button
-                onClick={handleCloseClick}
-                className="p-1 rounded-full hover:bg-secondary transition-colors"
-                aria-label="Закрыть"
-              >
-                <X size={20} className="text-textPrimary" />
-              </button>
-            )}
-          </div>
-        )}
         <div className="p-4">{children}</div>
       </div>
     </div>,

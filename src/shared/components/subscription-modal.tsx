@@ -4,38 +4,13 @@ import { ContentType } from "../types/interfaces";
 import { useSubscription } from "../hooks/use-subscription";
 import useTelegram from "../hooks/use-telegram";
 import { toast } from "react-hot-toast";
+import { StarIcon } from "./ui/icons/star";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
   onClose: () => void;
   type: ContentType | null;
 }
-
-const getTypeTitle = (type: ContentType | null): string => {
-  switch (type) {
-    case ContentType.COACH:
-      return "Подписка на тренера";
-    case ContentType.PLAYER:
-      return "Подписка на игрока";
-    case ContentType.PARENT:
-      return "Подписка на родителя";
-    default:
-      return "Подписка";
-  }
-};
-
-const getTypeIcon = (type: ContentType | null): string => {
-  switch (type) {
-    case ContentType.COACH:
-      return "🧑‍🏫";
-    case ContentType.PLAYER:
-      return "🥇";
-    case ContentType.PARENT:
-      return "👩🏻‍🍼";
-    default:
-      return "📱";
-  }
-};
 
 // Упрощенный спиннер
 const Spinner = () => (
@@ -54,8 +29,6 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   if (!type) return null;
 
   const { isActive, endDate } = getActiveSubscription(type);
-  const title = getTypeTitle(type);
-  const icon = getTypeIcon(type);
 
   const handleSubscribe = async () => {
     if (isLoading) return;
@@ -72,41 +45,47 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`${title} ${icon}`}
-      className="w-[90%]"
+      title={`Информация о подписке`}
+      className="w-[90%] max-w-md"
     >
-      <div className="flex flex-col gap-4">
-        <div className="bg-primary p-4 rounded-lg">
-          <h3 className="text-xl font-bold text-textPrimary mb-4">
-            Информация о подписке
-          </h3>
-
+      <div className="flex flex-col gap-[80px]">
+        <div className="rounded-2xl flex items-center justify-between">
           {isActive ? (
-            <div className="bg-primary text-textPrimary border border-border rounded-[12px] p-3">
-              <p className="font-medium">Подписка активна</p>
-              <p className="text-sm">Действует до: {endDate}</p>
+            <div className="rounded-xl">
+              <p className="font-semibold text-[18px] text-textAccent">
+                Подписка активна
+              </p>
+              <p className="text-[12px] ml-[2px] text-textSecondary">
+                Действует до: {endDate}
+              </p>
             </div>
           ) : (
-            <div className="bg-primary text-textPrimary border border-border rounded-[12px] p-3">
-              <p className="font-medium">
-                Стоимость: <span className="text-textPrimary">1200 ⭐</span>
+            <div className="rounded-xl">
+              <p className="font-semibold text-[18px] text-textAccent">
+                Купить подписку
               </p>
-              <p className="text-sm">Длительность: 30 дней</p>
+              <p className="text-[12px] ml-[2px] text-textSecondary">
+                Длительность: 30 дней
+              </p>
             </div>
           )}
+          <p className="font-semibold text-[18px] flex items-center gap-1 text-textAccent">
+            <span className="text-textAccent">1200</span>
+            <StarIcon size={16} color="#00D26A" strokeColor="#00D26A" />
+          </p>
         </div>
 
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end gap-1 mt-3">
           <button
-            disabled={isLoading}
             onClick={onClose}
-            className="px-4 py-2 mr-2 rounded-lg border text-textPrimary border-border"
+            className="px-6 py-2.5 text-textPrimary"
+            disabled={isLoading}
           >
             Отмена
           </button>
           <button
             onClick={handleSubscribe}
-            className="px-4 py-2 bg-textPrimary text-white rounded-lg min-w-[120px] h-[40px] flex justify-center items-center"
+            className="px-6 py-2.5 bg-textAccent text-textPrimary rounded-xl min-w-[120px] flex justify-center items-center"
             disabled={isLoading}
           >
             {isActive ? "Продлить" : isLoading ? <Spinner /> : "Подключить"}

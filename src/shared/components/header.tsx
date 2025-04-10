@@ -37,7 +37,7 @@ const Header = () => {
             onClick={handleOpenSidebar}
           >
             <AlignJustify
-              className="text-textPrimary"
+              className="text-textAccent"
               size={20}
               strokeWidth={1.75}
             />
@@ -48,7 +48,7 @@ const Header = () => {
               onClick={handleOpenAdminSidebar}
             >
               <FileSliders
-                className="text-textPrimary"
+                className="text-textAccent"
                 size={20}
                 strokeWidth={1.75}
               />

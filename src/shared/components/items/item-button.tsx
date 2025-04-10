@@ -4,17 +4,19 @@ import { cn } from "../../utils/cn";
 interface ItemButtonProps {
   type?: "default" | "permission";
   hasAccess?: boolean;
+  color?: string;
 }
 
-const ItemButton = ({ hasAccess = true }: ItemButtonProps) => {
+const ItemButton = ({
+  hasAccess = true,
+  color = "text-textAccent",
+}: ItemButtonProps) => {
   const renderIcon = () => {
     if (!hasAccess) {
       return <Lock size={16} className="text-red-400" />;
     }
 
-    return (
-      <ChevronRight strokeWidth={2} size={16} className="text-textPrimary" />
-    );
+    return <ChevronRight strokeWidth={2} size={16} />;
   };
 
   return (
@@ -22,8 +24,9 @@ const ItemButton = ({ hasAccess = true }: ItemButtonProps) => {
       <button
         className={cn(
           "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-          "bg-primary border border-border p-2 rounded-full text-[12px] font-medium",
-          "transition-colors duration-200"
+          `bg-primary border p-2 rounded-full text-[12px] text-${color} font-medium`,
+          "transition-colors duration-200",
+          hasAccess ? `border-${color}` : `border-red-400`
         )}
       >
         {renderIcon()}

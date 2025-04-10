@@ -9,12 +9,14 @@ export const FOLDERS_QUERY_KEY = "folders";
 
 interface UseFoldersOptions {
   type?: ContentType;
+  enabled?: boolean;
 }
 
 export const useFolders = (options?: UseFoldersOptions) => {
   return useQuery({
     queryKey: [FOLDERS_QUERY_KEY, options?.type],
     queryFn: () => foldersService.getFolders(options?.type),
+    enabled: options?.enabled,
   });
 };
 

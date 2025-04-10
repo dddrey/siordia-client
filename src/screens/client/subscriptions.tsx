@@ -5,7 +5,7 @@ import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 const SubscriptionScreen = () => {
   return (
     <ContentWrapper
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center mt-4"
       withFooter={false}
     >
       <SubscriptionsList />

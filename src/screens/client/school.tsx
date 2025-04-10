@@ -37,7 +37,7 @@ const SchoolScreen = () => {
             className="bg-primary/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
           >
             <p className="text-lg font-semibold">FC Kickstart 🎓</p>
-            <p className="text-base">
+            <p className="text-base text-textSecondary">
               Это результат моего опыта и страсти к футболу. Я верю в силу
               индивидуального подхода и поэтому создал клуб, где каждый игрок
               получает максимум внимания к деталям и развитию характера.
@@ -51,7 +51,7 @@ const SchoolScreen = () => {
             className="bg-primary/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light"
           >
             <p className="text-lg font-semibold">Личное участие 📝</p>
-            <p className="text-base">
+            <p className="text-base text-textSecondary">
               Я лично вовлечен во все процессы, от организации до тренировок.
             </p>
           </motion.div>
@@ -63,7 +63,7 @@ const SchoolScreen = () => {
             className="bg-primary/50 p-4 flex flex-col gap-2 rounded-lg shadow-card-sm-light mb-3"
           >
             <p className="text-lg font-semibold">Моя миссия 💫</p>
-            <p className="text-base">
+            <p className="text-base text-textSecondary">
               Помочь каждому футболисту раскрыть свой потенциал, и для этого я
               создал эту платформу, чтобы делиться своим опытом с футболистами с
               любой точки планеты!

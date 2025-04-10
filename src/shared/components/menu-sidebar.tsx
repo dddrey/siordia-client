@@ -12,7 +12,7 @@ const MenuSidebar = () => {
     <Sidebar isOpen={isOpen} onClose={close}>
       <div className="flex flex-col h-full w-full">
         <div className="flex items-center justify-center w-full mt-3">
-          <p className="text-textPrimary text-3xl font-bold mb-10">Mеню</p>
+          <p className="text-textAccent text-3xl font-bold mb-10">Mеню</p>
         </div>
         <MenuHistoryCard
           title="Сильный удар"

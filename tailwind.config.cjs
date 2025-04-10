@@ -70,11 +70,12 @@ module.exports = {
         "safe-area-content": "var(--tg-content-safe-area-inset-top)",
       },
       colors: {
-        primary: "#272e4a",
-        secondary: "#1a1f33",
-        border: "#f6d061",
-        textPrimary: "#f6d061",
-        textSecondary: "#ccc",
+        primary: "#142947",
+        secondary: "#0C1E3C",
+        border: "#00D26A",
+        textPrimary: "#FFFFFF",
+        textAccent: "#00D26A",
+        textSecondary: "#B0BEC5 ",
       },
       boxShadow: {
         "card-light":

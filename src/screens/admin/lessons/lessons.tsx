@@ -34,14 +34,14 @@ const LessonsScreen = () => {
           onClick={setHapticFeedback}
           className="bg-primary p-2 rounded-[10px] border border-border"
         >
-          <FolderIcon className="w-4 h-4 text-textPrimary" />
+          <FolderIcon className="w-4 h-4 text-textAccent" />
         </Link>
         <Link
           to="/admin/lesson/create"
           onClick={onClick}
           className="bg-primary p-2 rounded-[10px] border border-border"
         >
-          <PlusIcon className="w-4 h-4 text-textPrimary" />
+          <PlusIcon className="w-4 h-4 text-textAccent" />
         </Link>
       </div>
       <ItemsList

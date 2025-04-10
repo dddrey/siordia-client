@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
-import SubscriptionCard from "./subscription-card";
 import { ContentType } from "../../types/interfaces";
 import { useSubscriptionModal } from "../../store/use-subscription-modal";
+import { PlayerIcon } from "../ui/icons/player";
+import { PitchIcon } from "../ui/icons/pitch";
+import { FamilyIcon } from "../ui/icons/family";
+import SubscriptionCard from "./subscription-card";
+
 import SubscriptionModal from "../subscription-modal";
 
 const SubscriptionsList = () => {
@@ -18,8 +22,14 @@ const SubscriptionsList = () => {
             transition={{ duration: 0.5 }}
           >
             <SubscriptionCard
-              title="Подписка на тренера"
-              icon="🧑‍🏫"
+              title="Для футболистов"
+              icon={
+                <PlayerIcon
+                  color="#142947"
+                  strokeColor="#142947"
+                  className="w-[30px] h-[30px]"
+                />
+              }
               price={1200}
               duration="30 дней"
               type={ContentType.COACH}
@@ -33,8 +43,14 @@ const SubscriptionsList = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <SubscriptionCard
-              title="Подписка на игрока"
-              icon="🥇"
+              title="Для Тренеров"
+              icon={
+                <PitchIcon
+                  color="#142947"
+                  strokeColor="#142947"
+                  className="w-[30px] h-[30px]"
+                />
+              }
               price={1200}
               duration="30 дней"
               type={ContentType.PLAYER}
@@ -48,8 +64,14 @@ const SubscriptionsList = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <SubscriptionCard
-              title="Подписка на родителя"
-              icon="👩🏻‍🍼"
+              title="Для родителей"
+              icon={
+                <FamilyIcon
+                  color="#142947"
+                  strokeColor="#142947"
+                  className="w-[30px] h-[30px]"
+                />
+              }
               price={1200}
               duration="30 дней"
               type={ContentType.PARENT}

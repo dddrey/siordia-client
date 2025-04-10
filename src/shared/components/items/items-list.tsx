@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import FolderItem from "./item";
 import ErrorComponent from "../error";
 import Skeleton from "../ui/skeleton";
+import { cn } from "@/shared/utils/cn";
 
 interface ItemsListProps {
   items: IFolder[] | ITopic[] | ILesson<"preview">[];
@@ -16,6 +17,9 @@ interface ItemsListProps {
   type?: "default" | "permission";
   hasAccess?: boolean;
   limit?: number;
+  className?: string;
+  color?: string;
+  isSoon?: boolean;
 }
 
 const ItemsList = ({
@@ -29,7 +33,10 @@ const ItemsList = ({
   onClick,
   params,
   hasAccess = false,
+  className,
   limit = 10,
+  color = "textAccent",
+  isSoon = false,
 }: ItemsListProps) => {
   const [displayCount, setDisplayCount] = useState(limit);
   const hasMoreItems = items.length > displayCount;
@@ -39,6 +46,26 @@ const ItemsList = ({
   const handleShowMore = () => {
     setDisplayCount((prev) => prev + limit);
   };
+
+  if (isSoon) {
+    return (
+      <div className="w-full h-full flex flex-col gap-[4px] mt-4">
+        <div
+          className={cn(
+            "w-full mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-between"
+          )}
+        >
+          <p className={`text-[16px] font-medium text-${color}`}>{title}</p>
+          <p className={`text-[12px] font-medium text-${color}`}>{subtitle}</p>
+        </div>
+        <p
+          className={`text-[18px] font-medium mx-auto mt-10 mb-2 text-${color} text-opacity-50`}
+        >
+          Скоро появится
+        </p>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -75,14 +102,25 @@ const ItemsList = ({
   }
 
   return (
-    <section className="w-full h-full flex flex-col gap-[4px] pt-5 pb-8">
-      <div className="w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-between">
-        <p className="text-[16px] font-medium text-textPrimary">{title}</p>
-        <p className="text-[12px] font-medium text-textPrimary">{subtitle}</p>
+    <section
+      className={cn(
+        "w-[94%] mx-auto h-full flex flex-col gap-[4px] pt-5 pb-8",
+        className
+      )}
+    >
+      <div
+        className={cn(
+          "w-full mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-between"
+        )}
+      >
+        <p className={`text-[16px] font-medium text-${color}`}>{title}</p>
+        <p className={`text-[12px] font-medium text-${color}`}>{subtitle}</p>
       </div>
       {items.length === 0 && (
         <Fragment>
-          <p className="text-[18px] font-medium mx-auto mt-10 mb-2 text-textPrimary/70">
+          <p
+            className={`text-[18px] font-medium mx-auto mt-10 mb-2 text-${color} text-opacity-50`}
+          >
             Нет элементов
           </p>
         </Fragment>
@@ -100,6 +138,7 @@ const ItemsList = ({
                 ? !item.isSubscriptionRequired || hasAccess
                 : true,
             }}
+            color={color}
             onClick={onClick}
             key={item.id}
           />
@@ -109,13 +148,16 @@ const ItemsList = ({
       {hasMoreItems && (
         <button
           onClick={handleShowMore}
-          className="w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-center gap-2"
+          className={cn(
+            "w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-center gap-2",
+            className
+          )}
         >
-          <p className="text-[16px] font-medium text-textPrimary">
+          <p className={`text-[16px] font-medium text-${color}`}>
             Показать еще
           </p>
           <svg
-            className="w-5 h-5 text-textPrimary"
+            className={`w-5 h-5 text-${color}`}
             fill="none"
             strokeWidth={2}
             stroke="currentColor"

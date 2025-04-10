@@ -16,6 +16,7 @@ const FoldersScreen = () => {
     error,
   } = useFolders({
     type: type || undefined,
+    enabled: type === "player",
   });
 
   const getTitle = () => {
@@ -27,16 +28,12 @@ const FoldersScreen = () => {
 
   return (
     <ContentWrapper withFooter={false} className="pt-safe-area">
-      <LogoImage
-        isLoading={isLoading}
-        title={getTitle()}
-        type="large"
-        className="mx-auto bg-primary p-3 rounded-[10px] w-[94%]"
-      />
+      <LogoImage isLoading={isLoading} title={getTitle()} type="large" />
       <ItemsList
         isLoading={isLoading}
         isError={!!error}
         items={folders || []}
+        isSoon={type === "coach" || type === "parent"}
         title={
           type
             ? `Папки для ${type === "player" ? "футболистов" : type === "coach" ? "тренеров" : "родителей"}`

@@ -25,9 +25,11 @@ type ItemProps = ItemDefaultProps | ItemPermissionProps;
 const Item = ({
   item,
   onClick,
+  color,
 }: {
   item: ItemProps;
   onClick?: (id: string) => void;
+  color?: string;
 }) => {
   const navigate = useNavigate();
 
@@ -52,14 +54,15 @@ const Item = ({
     <div
       onClick={handleClick}
       className={cn(
-        "w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px]",
+        "w-full mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px]",
         "flex items-center justify-between",
         "transition-opacity duration-200"
       )}
     >
-      <p className="text-[12px] font-medium text-textPrimary">{title}</p>
+      <p className={`text-[12px] font-medium text-${color}`}>{title}</p>
       <ItemButton
         type={type}
+        color={color}
         hasAccess={item.type === "permission" ? item.hasAccess : undefined}
       />
     </div>

@@ -32,10 +32,10 @@ const MenuLink = ({ text, path, onClick }: MenuLinkProps) => {
       to={path}
       onClick={handleClick}
       className={cn(
-        "p-3 text-[14px] w-[90%] border border-border text-textPrimary rounded-lg",
+        "p-3 text-[14px] w-[90%] border border-border text-textAccent rounded-lg",
         isActive(path)
-          ? "border-border text-textPrimary"
-          : "border-border/50 text-textPrimary/50"
+          ? "border-textAccent text-textAccent"
+          : "border-border/50 text-textAccent/50"
       )}
     >
       <p>{text}</p>
