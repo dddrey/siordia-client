@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormField from "../ui/form-field";
-import FormButton from "../ui/form-button";
 import { FolderFormValues } from "@/schema/folder.schema";
 import { folderSchema } from "@/schema/folder.schema";
-import FormSelect from "../ui/form-select";
+import FormField from "@/shared/components/ui/form-field";
+import FormButton from "@/shared/components/ui/form-button";
+import FormSelect from "@/shared/components/ui/form-select";
 
 interface FolderFormProps {
   folder?: FolderFormValues;

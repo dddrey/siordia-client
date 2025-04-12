@@ -1,9 +1,11 @@
 import TextContainer from "../../text-container";
-import { ITask } from "../../../types/interfaces";
 
 interface TaskProps {
   index: number;
-  task: ITask;
+  task: {
+    name: string;
+    description: string;
+  };
 }
 
 const Task = ({ index, task }: TaskProps) => {

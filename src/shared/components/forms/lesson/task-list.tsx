@@ -7,8 +7,8 @@ import {
 } from "react-hook-form";
 import { LessonFormValues } from "@/schema/lesson.schema";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import TaskItem from "./task-item";
 import useTelegram from "@/shared/hooks/use-telegram";
+import TaskItem from "./task-item";
 
 interface TaskListProps {
   register: UseFormRegister<LessonFormValues>;

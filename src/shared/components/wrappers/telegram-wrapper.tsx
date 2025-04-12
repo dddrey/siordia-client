@@ -1,5 +1,4 @@
 import useTelegram from "@/shared/hooks/use-telegram";
-import BackButtonWrapper from "./backbutton-wrapper";
 import { useEffect } from "react";
 
 export const TelegramWrapper = ({
@@ -25,9 +24,5 @@ export const TelegramWrapper = ({
     }
   }, [webAppState]);
 
-  return (
-    <BackButtonWrapper>
-      <div className="h-screen w-screen overflow-y-scroll">{children}</div>
-    </BackButtonWrapper>
-  );
+  return <div className="h-screen w-screen overflow-y-scroll">{children}</div>;
 };

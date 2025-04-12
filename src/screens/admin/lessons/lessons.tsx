@@ -1,5 +1,3 @@
-"use client";
-
 import { FolderIcon, PlusIcon } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useLessons } from "@/shared/hooks/use-lessons";
@@ -8,9 +6,14 @@ import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import ItemsList from "@/shared/components/items/items-list";
 import useTelegram from "@/shared/hooks/use-telegram";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
+
 const LessonsScreen = () => {
   const { topicId } = useParams();
   const { setHapticFeedback } = useTelegram();
+  useBackButton({
+    isOpen: true,
+  });
   const {
     data: lessons,
     isLoading,

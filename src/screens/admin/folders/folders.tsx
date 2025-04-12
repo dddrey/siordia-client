@@ -3,6 +3,7 @@ import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import TypeFilter from "@/shared/components/ui/type-filter";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
+import useBackButton from "@/shared/hooks/use-backbutton";
 import { useFolders } from "@/shared/hooks/use-folders";
 import useTelegram from "@/shared/hooks/use-telegram";
 import { ContentType } from "@/shared/types/interfaces";
@@ -20,6 +21,10 @@ const FoldersScreen = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const type = searchParams.get("type") as ContentType | null;
+
+  useBackButton({
+    isOpen: true,
+  });
 
   const {
     data: folders,

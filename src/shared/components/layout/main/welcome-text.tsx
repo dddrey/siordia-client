@@ -20,7 +20,7 @@ export const WelcomeText = ({
 
   return (
     <div
-      className={`bg-primary rounded-xl px-6 py-4 shadow-sm mx-auto mt-3 ${className}`}
+      className={`bg-primary rounded-xl px-4 py-4 shadow-sm mx-auto mt-3 ${className}`}
     >
       <div className="flex flex-col gap-4">
         <motion.div

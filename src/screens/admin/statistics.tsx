@@ -4,9 +4,13 @@ import { useStatistics } from "@/shared/hooks/use-statistics";
 import { Eye, Users, CreditCard, BookOpen, Folder, Book } from "lucide-react";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const StatisticsScreen = () => {
   const { data, isLoading, error } = useStatistics();
+  useBackButton({
+    isOpen: true,
+  });
 
   if (isLoading) return <LoadingOverview />;
 

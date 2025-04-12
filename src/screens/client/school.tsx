@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import withAuth from "@/shared/components/hoc/auth";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const SchoolScreen = () => {
+  useBackButton({
+    isOpen: true,
+  });
   return (
     <ContentWrapper
       className="flex flex-col pt-safe-area items-center justify-center"

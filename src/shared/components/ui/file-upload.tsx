@@ -38,8 +38,8 @@ const FileUpload = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "video/*": accept === "video" ? [] : [],
-      "image/*": accept === "image" ? [] : [],
+      ...(accept === "video" ? { "video/*": [] } : {}),
+      ...(accept === "image" ? { "image/*": [] } : {}),
     },
     disabled: disabled || loading,
     maxFiles: 1,
@@ -61,6 +61,7 @@ const FileUpload = ({
             src={value instanceof File ? URL.createObjectURL(value) : value}
             className="w-full h-full object-cover"
             controls
+            playsInline
           />
         )}
         <button

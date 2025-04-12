@@ -5,10 +5,15 @@ import { useSearchParams } from "react-router-dom";
 import { ContentType } from "@/shared/types/interfaces";
 import LogoImage from "@/shared/components/logo-Image";
 import withAuth from "@/shared/components/hoc/auth";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FoldersScreen = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type") as ContentType | null;
+
+  useBackButton({
+    isOpen: true,
+  });
 
   const {
     data: folders,

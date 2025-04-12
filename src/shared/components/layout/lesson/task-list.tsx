@@ -1,8 +1,10 @@
-import { ITask } from "../../../types/interfaces";
 import Task from "./task";
 
 interface TaskListProps {
-  tasks: ITask[];
+  tasks: {
+    name: string;
+    description: string;
+  }[];
 }
 
 const TaskList = ({ tasks }: TaskListProps) => {

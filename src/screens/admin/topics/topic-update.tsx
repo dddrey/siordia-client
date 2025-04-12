@@ -1,4 +1,4 @@
-import TopicForm from "@/shared/components/forms/topic";
+import TopicForm from "@/shared/components/forms/topic/topic";
 import { TopicFormValues } from "@/schema/topic.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import {
@@ -11,14 +11,16 @@ import FormButton from "@/shared/components/ui/form-button";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
 const TopicUpdateScreen = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useTopic(id as string);
   const { mutate: updateTopic, isPending } = useUpdateTopic();
   const { mutate: deleteTopic, isPending: isPendingDelete } = useDeleteTopic();
   const navigate = useNavigate();
-
-  console.log(data);
+  useBackButton({
+    isOpen: true,
+  });
 
   const handleSubmit = async (data: TopicFormValues) => {
     updateTopic({

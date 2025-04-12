@@ -12,12 +12,17 @@ import { ContentType } from "@/shared/types/interfaces";
 import { useHistoryCardStore } from "@/shared/store/use-history-card";
 import withAuth from "@/shared/components/hoc/auth";
 import VideoPlayer from "@/shared/components/video-player";
+import useBackButton from "@/shared/hooks/use-backbutton";
 const LessonScreen = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type") as ContentType | undefined;
   const { data, isLoading, error } = useLesson(id as string, type);
   const { setLesson } = useHistoryCardStore();
+
+  useBackButton({
+    isOpen: true,
+  });
 
   useEffect(() => {
     const lesson = data?.lesson;

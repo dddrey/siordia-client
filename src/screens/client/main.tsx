@@ -12,6 +12,7 @@ import {
   welcomeTextParent,
   welcomeTextPlayer,
 } from "@/shared/utils/main-text";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const MainScreen = () => {
   const {
@@ -29,6 +30,10 @@ const MainScreen = () => {
     isLoading: isParentLoading,
     error: parentError,
   } = useFolders({ type: ContentType.PARENT, enabled: false });
+
+  useBackButton({
+    isOpen: false,
+  });
 
   const isLoading = isPlayerLoading || isCoachLoading || isParentLoading;
 

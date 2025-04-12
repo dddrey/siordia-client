@@ -1,4 +1,4 @@
-import FolderForm from "@/shared/components/forms/folder";
+import FolderForm from "@/shared/components/forms/folder/folder";
 import { FolderFormValues } from "@/schema/folder.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import {
@@ -11,6 +11,7 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FolderUpdateScreen = () => {
   const { id } = useParams();
@@ -19,6 +20,9 @@ const FolderUpdateScreen = () => {
   const { mutate: deleteFolder, isPending: isPendingDelete } =
     useDeleteFolder();
   const navigate = useNavigate();
+  useBackButton({
+    isOpen: true,
+  });
 
   const handleSubmit = async (data: FolderFormValues) => {
     updateFolder({

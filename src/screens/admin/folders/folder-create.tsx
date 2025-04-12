@@ -1,13 +1,18 @@
-import FolderForm from "@/shared/components/forms/folder";
+import FolderForm from "@/shared/components/forms/folder/folder";
 import { FolderFormValues } from "@/schema/folder.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useCreateFolder } from "@/shared/hooks/use-folders";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FolderCreateScreen = () => {
   const { mutate: createFolder, isPending, isError } = useCreateFolder();
+
+  useBackButton({
+    isOpen: true,
+  });
 
   const handleSubmit = async (data: FolderFormValues) => {
     createFolder({

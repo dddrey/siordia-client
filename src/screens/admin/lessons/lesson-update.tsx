@@ -1,6 +1,4 @@
-"use client";
-
-import LessonForm from "@/shared/components/forms/lesson";
+import LessonForm from "@/shared/components/forms/lesson/lesson";
 import { LessonFormValues } from "@/schema/lesson.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useParams } from "react-router-dom";
@@ -13,17 +11,16 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
 import withAdmin from "@/shared/components/hoc/admin";
-import { useEffect } from "react";
+import useBackButton from "@/shared/hooks/use-backbutton";
 const LessonUpdateScreen = () => {
   const { id } = useParams();
   const { data: lesson, isLoading, error } = useLesson(id as string);
   const { mutate: updateLesson, isPending } = useUpdateLesson();
+  useBackButton({
+    isOpen: true,
+  });
   const { mutate: deleteLesson, isPending: isPendingDelete } =
     useDeleteLesson();
-
-  useEffect(() => {
-    console.log(typeof lesson?.lesson.isSubscriptionRequired);
-  }, [lesson]);
 
   const handleSubmit = async (data: LessonFormValues) => {
     const formData = new FormData();

@@ -1,12 +1,17 @@
-import ReviewForm from "@/shared/components/forms/review";
+import ReviewForm from "@/shared/components/forms/review/review";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { ReviewFormValues } from "@/schema/review.schema";
 import withAuth from "@/shared/components/hoc/auth";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const ReviewScreen = () => {
   const onSubmit = async (data: ReviewFormValues): Promise<void> => {
     console.log(data);
   };
+
+  useBackButton({
+    isOpen: true,
+  });
 
   return (
     <ContentWrapper className="flex flex-col justify-center">

@@ -6,10 +6,15 @@ import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useParams } from "react-router-dom";
 import { useFolder } from "@/shared/hooks/use-folders";
 import withAuth from "@/shared/components/hoc/auth";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FolderScreen = () => {
   const { id } = useParams();
   const { data: folder, isLoading, error } = useFolder(id as string);
+
+  useBackButton({
+    isOpen: true,
+  });
 
   return (
     <ContentWrapper withFooter={false} className="pt-safe-area">

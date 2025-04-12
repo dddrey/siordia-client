@@ -1,6 +1,4 @@
-"use client";
-
-import TopicForm from "@/shared/components/forms/topic";
+import TopicForm from "@/shared/components/forms/topic/topic";
 import { TopicFormValues } from "@/schema/topic.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useCreateTopic } from "@/shared/hooks/use-topics";
@@ -9,10 +7,14 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import TopicChoose from "@/shared/components/choose/topic";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const TopicCreateScreen = () => {
   const [searchParams] = useSearchParams();
   const folderId = searchParams.get("folderId");
+  useBackButton({
+    isOpen: true,
+  });
 
   const { mutate: createTopic, isPending, isError } = useCreateTopic();
 

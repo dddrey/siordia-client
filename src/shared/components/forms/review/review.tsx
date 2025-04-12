@@ -1,13 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormButton from "../ui/form-button";
+import FormButton from "@/shared/components/ui/form-button";
 import {
   ReviewFormValues,
   reviewSchema,
   ReviewFileType,
 } from "@/schema/review.schema";
-import FileUpload from "../ui/file-upload";
-import FormTextArea from "../ui/form-textarea";
+import FileUpload from "@/shared/components/ui/file-upload";
+import FormTextArea from "@/shared/components/ui/form-textarea";
 
 interface ReviewFormProps {
   onSubmit: (data: ReviewFormValues) => Promise<void>;

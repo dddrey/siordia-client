@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       port: 5182,
       strictPort: true,
       allowedHosts: [
-        "implementing-enjoy-get-indicators.trycloudflare.com",
+        "compare-enrollment-gm-thou.trycloudflare.com",
         "siordia-client-production.up.railway.app",
         "skill-up-football.xyz",
       ],
@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
       allowedHosts: [
         "localhost",
         "127.0.0.1",
-        "graduated-disposition-effect-epa.trycloudflare.com",
+        "compare-enrollment-gm-thou.trycloudflare.com",
         "siordia-client-production.up.railway.app",
         "skill-up-football.xyz",
       ],

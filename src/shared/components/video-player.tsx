@@ -1,40 +1,59 @@
+import { useEffect, useRef, useState } from "react";
 import { lessonsService } from "@/shared/services/lesson.service";
 import { useQuery } from "@tanstack/react-query";
-import ErrorComponent from "@/shared/components/error";
 import Loader from "@/shared/components/ui/loader";
-import { useEffect } from "react";
+import ErrorComponent from "@/shared/components/error";
 
 interface VideoPlayerProps {
-  videoId: string;
+  videoId?: string;
+  file?: File;
 }
 
-const VideoPlayer = ({ videoId }: VideoPlayerProps) => {
+const VideoPlayer = ({ videoId, file }: VideoPlayerProps) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["lesson-video", videoId],
-    queryFn: () => lessonsService.getVideoUrl(videoId),
+    queryFn: () => lessonsService.getVideoUrl(videoId!),
+    enabled: !!videoId,
   });
 
   useEffect(() => {
-    if (data) {
-      console.log(data);
+    if (file) {
+      const localUrl = URL.createObjectURL(file);
+      setVideoSrc(localUrl);
+      return () => URL.revokeObjectURL(localUrl);
+    }
+  }, [file]);
+
+  useEffect(() => {
+    if (data?.videoUrl) {
+      setVideoSrc(data.videoUrl);
     }
   }, [data]);
 
   if (isLoading)
     return (
-      <div className="w-full h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto object-cover flex items-center justify-center">
+      <div className="w-full h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto flex items-center justify-center">
         <Loader />
       </div>
     );
-  if (error || !data) return <ErrorComponent error={error} />;
+
+  if ((error && videoId) || !videoSrc) {
+    return <ErrorComponent error={error} />;
+  }
 
   return (
-    <video
-      className="w-full h-[260px] bg-primary shadow-card-sm-light rounded-[12px] mx-auto object-cover"
-      controls
-      playsInline
-      src={data.videoUrl}
-    ></video>
+    <div className="relative w-full h-[260px] rounded-[12px] overflow-hidden shadow-card-sm-light bg-black">
+      <video
+        ref={videoRef}
+        src={videoSrc ?? ""}
+        className="w-full h-full object-cover"
+        controls
+        playsInline
+      />
+    </div>
   );
 };
 

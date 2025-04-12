@@ -1,4 +1,4 @@
-import LessonForm from "@/shared/components/forms/lesson";
+import LessonForm from "@/shared/components/forms/lesson/lesson";
 import { LessonFormValues } from "@/schema/lesson.schema";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useCreateLesson } from "@/shared/hooks/use-lessons";
@@ -7,11 +7,16 @@ import LoadingOverview from "@/shared/components/loading-overview";
 import LessonChoose from "@/shared/components/choose/lesson";
 import { useSearchParams } from "react-router-dom";
 import withAdmin from "@/shared/components/hoc/admin";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const LessonCreateScreen = () => {
   const [searchParams] = useSearchParams();
   const topicId = searchParams.get("topicId");
   const { mutate: createLesson, isPending, isError } = useCreateLesson();
+
+  useBackButton({
+    isOpen: true,
+  });
 
   const handleSubmit = async (data: LessonFormValues) => {
     if (!topicId) return;

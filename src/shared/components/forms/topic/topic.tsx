@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormField from "../ui/form-field";
-import FormButton from "../ui/form-button";
+import FormField from "@/shared/components/ui/form-field";
+import FormButton from "@/shared/components/ui/form-button";
 import { TopicFormValues, topicSchema } from "@/schema/topic.schema";
 
 interface TopicFormProps {

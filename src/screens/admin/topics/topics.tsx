@@ -1,9 +1,8 @@
-"use client";
-
 import withAdmin from "@/shared/components/hoc/admin";
 import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
+import useBackButton from "@/shared/hooks/use-backbutton";
 import useTelegram from "@/shared/hooks/use-telegram";
 import { useTopics } from "@/shared/hooks/use-topics";
 import { FolderIcon, PlusIcon } from "lucide-react";
@@ -13,6 +12,10 @@ const TopicsScreen = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("folderId");
   const { setHapticFeedback } = useTelegram();
+
+  useBackButton({
+    isOpen: true,
+  });
 
   const {
     data: topics,

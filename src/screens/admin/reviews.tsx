@@ -1,7 +1,11 @@
 import withAdmin from "@/shared/components/hoc/admin";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
-
+import useBackButton from "@/shared/hooks/use-backbutton";
 const ReviewsScreen = () => {
+  useBackButton({
+    isOpen: true,
+  });
+
   return (
     <ContentWrapper
       className="flex justify-center items-center"

@@ -56,7 +56,7 @@ export const HeroSlider = () => {
               <img
                 src={slide.url}
                 alt={slide.altText}
-                className="object-cover w-full h-screen rounded-[12px]"
+                className="object-cover w-full max-w-[500px] h-screen rounded-[12px]"
               />
               {slide.type === "link" && (
                 <Link
