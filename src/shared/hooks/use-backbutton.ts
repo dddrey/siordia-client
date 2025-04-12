@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 interface UseBackButtonOptions {
   func?: () => void;
   isOpen?: boolean;
-  loading?: boolean;
 }
 
-const useBackButton = ({ func, isOpen, loading }: UseBackButtonOptions) => {
+const useBackButton = ({ func, isOpen }: UseBackButtonOptions) => {
   const backButton = window?.Telegram?.WebApp?.BackButton;
   const previousFuncRef = useRef<() => void>(null);
   const navigate = useNavigate();

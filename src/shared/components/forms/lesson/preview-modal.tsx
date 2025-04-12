@@ -1,11 +1,8 @@
-import { useEffect } from "react";
+import { usePreviewModalStore } from "@/shared/store/use-preview-modal";
 import LessonHeader from "../../layout/lesson/header";
 import TaskList from "../../layout/lesson/task-list";
 import TextContainer from "../../text-container";
 import VideoPlayer from "../../video-player";
-import useBackButton from "@/shared/hooks/use-backbutton";
-import { useNavigate } from "react-router-dom";
-import { usePreviewModalStore } from "@/shared/store/use-preview-modal";
 import FormButton from "../../ui/form-button";
 
 interface Task {

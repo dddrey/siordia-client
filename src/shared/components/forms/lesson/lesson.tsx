@@ -7,12 +7,10 @@ import { LessonButtons } from "./buttons";
 import { LessonTasksView } from "./views/tasks";
 import { VideoView } from "./views/video";
 import { SettingsView } from "./views/settings";
-import FormButton from "@/shared/components/ui/form-button";
-import useTelegram from "@/shared/hooks/use-telegram";
 import { PreviewModal } from "./preview-modal";
 import { usePreviewModalStore } from "@/shared/store/use-preview-modal";
-import useBackButton from "@/shared/hooks/use-backbutton";
-import { useNavigate } from "react-router-dom";
+import FormButton from "@/shared/components/ui/form-button";
+import useTelegram from "@/shared/hooks/use-telegram";
 
 interface LessonFormProps {
   lessonId?: string;
@@ -33,7 +31,6 @@ const LessonForm = ({
 }: LessonFormProps) => {
   const [view, setView] = useState<FormView>("settings");
   const { setHapticFeedback } = useTelegram();
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const {
     register,
     control,
