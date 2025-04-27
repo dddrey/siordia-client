@@ -32,7 +32,7 @@ const SubscriptionsList = () => {
               }
               price={1200}
               duration="30 дней"
-              type={ContentType.COACH}
+              type={ContentType.PLAYER}
               onOpenModal={openModal}
             />
           </motion.div>
@@ -53,7 +53,7 @@ const SubscriptionsList = () => {
               }
               price={1200}
               duration="30 дней"
-              type={ContentType.PLAYER}
+              type={ContentType.COACH}
               onOpenModal={openModal}
             />
           </motion.div>
