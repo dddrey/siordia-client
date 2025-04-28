@@ -4,6 +4,7 @@ import FormCheckbox from "@/shared/components/ui/form-checkbox";
 import { motion } from "framer-motion";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { FieldErrors } from "react-hook-form";
+import FormTextArea from "@/shared/components/ui/form-textarea";
 
 interface SettingsViewProps {
   type: string;
@@ -43,7 +44,7 @@ export const SettingsView = ({
         disabled={isLoading || isSubmitting}
       />
 
-      <FormField<LessonFormValues>
+      <FormTextArea<LessonFormValues>
         id="description"
         label="Описание"
         placeholder="Введите описание"
