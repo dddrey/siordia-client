@@ -11,6 +11,7 @@ interface SubscriptionCardProps {
   type: ContentType;
   icon: React.ReactNode;
   onOpenModal: (type: ContentType) => void;
+  isSoon?: boolean;
 }
 
 const SubscriptionCard: FC<SubscriptionCardProps> = ({
@@ -20,18 +21,24 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
   type,
   icon,
   onOpenModal,
+  isSoon,
 }) => {
   const { getActiveSubscription } = useSubscription();
   const { setHapticFeedback } = useTelegram();
   const { isActive, endDate } = getActiveSubscription(type);
 
   const handleClick = () => {
+    if (isSoon) return;
     setHapticFeedback();
     onOpenModal(type);
   };
 
   return (
-    <div className="p-3 h-[25vh] rounded-lg flex flex-col justify-between bg-primary text-textPrimary shadow-card-light">
+    <div
+      className={`p-3 h-[25vh] rounded-lg flex flex-col justify-between bg-primary text-textPrimary shadow-card-light relative ${
+        isSoon ? "opacity-70" : ""
+      }`}
+    >
       <div className="mb-4 w-full flex justify-between items-start">
         <div className="text-[18px] font-semibold flex gap-2 items-center">
           <div className="flex items-center gap-1 bg-textAccent rounded-[10px] p-2">
@@ -65,6 +72,13 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
           <ChevronRight size={20} strokeWidth={2} />
         </button>
       </div>
+      {isSoon && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-lg font-semibold text-textAccent bg-primary/80 px-4 py-2 rounded-lg">
+            Скоро появится
+          </span>
+        </div>
+      )}
     </div>
   );
 };
