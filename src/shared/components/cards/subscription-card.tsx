@@ -36,7 +36,7 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
   return (
     <div
       className={`p-3 h-[25vh] rounded-lg flex flex-col justify-between bg-primary text-textPrimary shadow-card-light relative ${
-        isSoon ? "opacity-70" : ""
+        isSoon ? "opacity-50" : ""
       }`}
     >
       <div className="mb-4 w-full flex justify-between items-start">
@@ -53,24 +53,28 @@ const SubscriptionCard: FC<SubscriptionCardProps> = ({
         </div>
         <div className="w-fit gap-1 flex items-center">
           <p className="text-[22px] font-semibold text-textAccent">
-            {price.toLocaleString()}
+            {isSoon ? "скоро" : price.toLocaleString()}
           </p>
           <div>
-            <StarIcon
-              className="w-[22px] h-[22px]"
-              color="#00D26A"
-              fill="#00D26A"
-            />
+            {!isSoon && (
+              <StarIcon
+                className="w-[22px] h-[22px]"
+                color="#00D26A"
+                fill="#00D26A"
+              />
+            )}
           </div>
         </div>
       </div>
       <div className="flex w-full items-end justify-end">
-        <button
-          onClick={handleClick}
-          className="text-[16px] bg-primary self-end p-[10px] text-textAccent rounded-full border border-border"
-        >
-          <ChevronRight size={20} strokeWidth={2} />
-        </button>
+        {!isSoon && (
+          <button
+            onClick={handleClick}
+            className="text-[16px] bg-primary self-end p-[10px] text-textAccent rounded-full border border-border"
+          >
+            <ChevronRight size={20} strokeWidth={2} />
+          </button>
+        )}
       </div>
       {isSoon && (
         <div className="absolute inset-0 flex items-center justify-center">
