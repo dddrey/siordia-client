@@ -55,6 +55,7 @@ const SubscriptionsList = () => {
               duration="30 дней"
               type={ContentType.COACH}
               onOpenModal={openModal}
+              isSoon={true}
             />
           </motion.div>
 
@@ -76,6 +77,7 @@ const SubscriptionsList = () => {
               duration="30 дней"
               type={ContentType.PARENT}
               onOpenModal={openModal}
+              isSoon={true}
             />
           </motion.div>
         </div>
