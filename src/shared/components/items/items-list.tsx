@@ -171,6 +171,7 @@ const ItemsList = ({
           </svg>
         </button>
       )}
+      {displayedItems.length > 5 && <div className="mb-10" />}
     </section>
   );
 };
