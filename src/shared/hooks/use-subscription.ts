@@ -4,9 +4,14 @@ import { useState } from "react";
 import { useUser } from "./use-user";
 import { toast } from "react-hot-toast";
 import { useSubscriptionModal } from "../store/use-subscription-modal";
+import { useQueryClient } from "@tanstack/react-query";
+import { FOLDERS_QUERY_KEY } from "./use-folders";
+import { LESSONS_QUERY_KEY } from "./use-lessons";
+import { TOPICS_QUERY_KEY } from "./use-topics";
 
 export const useSubscription = () => {
   const { data: user, refetch } = useUser();
+  const queryClient = useQueryClient();
   const { closeModal } = useSubscriptionModal();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,11 +20,20 @@ export const useSubscription = () => {
     try {
       setIsLoading(true);
       const res = await subscriptionsService.getPaimenLink(type);
-      window.Telegram.WebApp.openInvoice(res.data, (status) => {
+      window.Telegram.WebApp.openInvoice(res.data, async (status) => {
         if (status === "paid") {
           toast.success("Подписка успешно добавлена");
           closeModal();
           refetch();
+          await queryClient.invalidateQueries({
+            queryKey: [TOPICS_QUERY_KEY],
+          });
+          await queryClient.invalidateQueries({
+            queryKey: [LESSONS_QUERY_KEY],
+          });
+          await queryClient.invalidateQueries({
+            queryKey: [FOLDERS_QUERY_KEY],
+          });
         }
       });
     } catch (error) {
