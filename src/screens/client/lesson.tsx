@@ -47,7 +47,7 @@ const LessonScreen = () => {
 
   return (
     <ContentWrapper withFooter={false} className="pt-safe-area">
-      <LessonHeader name={lesson.name} number={lesson.number} />
+      <LessonHeader name={lesson.name} />
       <ButtonsContainer
         views={lesson.views}
         id={lesson.id}

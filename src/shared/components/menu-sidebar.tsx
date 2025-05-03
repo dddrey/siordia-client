@@ -14,12 +14,7 @@ const MenuSidebar = () => {
         <div className="flex items-center justify-center w-full mt-3">
           <p className="text-textAccent text-3xl font-bold mb-10">Mеню</p>
         </div>
-        <MenuHistoryCard
-          title="Сильный удар"
-          subtitle="Урок 1"
-          description="Футболист"
-          onClose={close}
-        />
+        <MenuHistoryCard onClose={close} />
         <div className="flex flex-1 flex-col items-center w-full gap-2 text-[10px] mt-4">
           <MenuLink onClick={close} text="Главная" path="/" />
           <MenuLink onClick={close} text="Подписки" path="/subscriptions" />

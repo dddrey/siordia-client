@@ -40,7 +40,7 @@ export const PreviewModal = ({
         ) : null}
       </div>
 
-      <LessonHeader name={name} number={1} />
+      <LessonHeader name={name} />
       {description && (
         <div className="w-[94%] mt-2 mx-auto rounded-[12px] p-3 bg-primary shadow-card-sm-light mb-1 flex flex-col items-center">
           <TextContainer
