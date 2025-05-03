@@ -122,6 +122,7 @@ const LessonForm = ({
       </form>
       <PreviewModal
         name={watch("name") || ""}
+        about={watch("about") || ""}
         description={watch("description") || ""}
         tasks={watch("tasks") || []}
         video={lessonId && !watch("video") ? lessonId : watch("video")}
