@@ -57,6 +57,11 @@ const LessonScreen = () => {
       <div className="w-[94%] mx-auto">
         <VideoPlayer videoId={lesson.id} />
       </div>
+      <div className="w-[94%] mx-auto my-3">
+        <p className="text-textPrimary text-[14px] font-medium ml-1 text-center">
+          {lesson.about || ""}
+        </p>
+      </div>
       {lesson.description && (
         <div className="w-[94%] mt-2 mx-auto rounded-[12px] p-3 bg-primary shadow-card-sm-light mb-1 flex flex-col items-center">
           <TextContainer
