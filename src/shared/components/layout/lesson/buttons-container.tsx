@@ -17,6 +17,9 @@ const ButtonsContainer = ({
   previousLessonId,
   nextLessonId,
 }: ButtonsContainerProps) => {
+  const platform = window.Telegram?.WebApp?.platform;
+
+  const isMobile = platform === "android" || platform === "ios";
   const navigate = useNavigate();
   const { setHapticFeedback } = useTelegram();
 
@@ -38,7 +41,11 @@ const ButtonsContainer = ({
   };
 
   return (
-    <div className="flex items-center justify-between gap-2 mb-2 w-[88%] mx-auto mt-4 font-medium">
+    <div
+      className={`flex items-center justify-between gap-2 mb-2 w-[88%] mx-auto font-medium ${
+        isMobile ? "mt-4" : "pt-[52px]"
+      }`}
+    >
       <div
         className={`w-8 h-8 ${previousLessonId ? "opacity-100" : "opacity-0"} bg-primary text-textPrimary text-opacity-70 shadow-card-sm-light rounded-full flex items-center justify-center`}
       >

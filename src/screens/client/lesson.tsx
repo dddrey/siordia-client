@@ -14,6 +14,9 @@ import withAuth from "@/shared/components/hoc/auth";
 import VideoPlayer from "@/shared/components/video-player";
 import useBackButton from "@/shared/hooks/use-backbutton";
 const LessonScreen = () => {
+  const platform = window.Telegram?.WebApp?.platform;
+
+  const isMobile = platform === "android" || platform === "ios";
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type") as ContentType | undefined;
@@ -46,7 +49,10 @@ const LessonScreen = () => {
   const { lesson, previousLessonId, nextLessonId } = data;
 
   return (
-    <ContentWrapper withFooter={false} className="pt-safe-area">
+    <ContentWrapper
+      withFooter={false}
+      className={`${isMobile ? "pt-safe-area" : "pt-2"}`}
+    >
       <LessonHeader name={lesson.name} />
       <ButtonsContainer
         views={lesson.views}
