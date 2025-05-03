@@ -52,12 +52,12 @@ export const HeroSlider = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-screen h-screen">
+            <div className="relative max-w-[500px] w-screen h-screen">
               <img
                 src={slide.url}
                 alt={slide.altText}
-                className="object-cover w-full max-w-[500px] h-screen rounded-[12px]"
-              />
+                className="object-cover relative w-full max-w-[500px] h-screen rounded-[12px]"
+              ></img>
               {slide.type === "link" && (
                 <Link
                   to={slide.link}

@@ -149,7 +149,7 @@ const ItemsList = ({
         <button
           onClick={handleShowMore}
           className={cn(
-            "w-[94%] mx-auto px-4 py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-center gap-2",
+            "w-full mx-auto py-3 bg-primary shadow-card-sm-light rounded-[10px] flex items-center justify-center gap-2",
             className
           )}
         >

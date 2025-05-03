@@ -24,6 +24,11 @@ const FolderScreen = () => {
         type="large"
         className="mx-auto bg-primary p-3 rounded-[10px] w-[94%]"
       />
+      <div className="w-[94%] mx-auto">
+        <p className="text-textPrimary text-[16px] font-medium ml-1 opacity-80">
+          {folder?.about || ""}
+        </p>
+      </div>
       <ItemsList
         items={folder?.topics || []}
         isLoading={isLoading}

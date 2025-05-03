@@ -22,6 +22,11 @@ const TopicScreen = () => {
         type="large"
         className="mx-auto bg-primary p-3 rounded-[10px] w-[94%] mt-5"
       />
+      <div className="w-[94%] mx-auto">
+        <p className="text-textPrimary text-[16px] font-medium ml-1 opacity-80">
+          {data?.topic.about || ""}
+        </p>
+      </div>
       <ItemsList
         items={data?.topic.lessons || []}
         isLoading={isLoading}

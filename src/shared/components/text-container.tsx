@@ -53,7 +53,7 @@ const TextContainer: React.FC<TextContainerProps> = ({
       >
         <p
           className={cn(
-            "text-gray-400 text-[12px] leading-relaxed break-word",
+            "text-gray-400 text-[12px] leading-relaxed whitespace-pre-wrap",
             textClassName
           )}
         >
