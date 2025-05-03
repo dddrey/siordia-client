@@ -3,19 +3,8 @@ import { Link } from "react-router-dom";
 import { useHistoryCardStore } from "../store/use-history-card";
 import useTelegram from "../hooks/use-telegram";
 import { useUser } from "../hooks/use-user";
-interface MenuHistoryCardProps {
-  title: string;
-  subtitle: string;
-  description: string;
-  onClose: () => void;
-}
 
-const MenuHistoryCard = ({
-  title,
-  subtitle,
-  description,
-  onClose,
-}: MenuHistoryCardProps) => {
+const MenuHistoryCard = ({ onClose }: { onClose: () => void }) => {
   const lesson = useHistoryCardStore((state) => state.lesson);
   const { data: user } = useUser();
   const { setHapticFeedback } = useTelegram();
@@ -33,13 +22,13 @@ const MenuHistoryCard = ({
     >
       <div className="flex h-full justify-between flex-col">
         <div className="flex flex-col">
-          <p className="text-textPrimary text-[10px]">{title}</p>
-          <p className="text-[8px] text-gray-400">{subtitle}</p>
+          <p className="text-textPrimary text-[12px]">{lesson.name}</p>
+          <p className="text-gray-400 text-[10px]">Урок.</p>
         </div>
-        <p className="text-[10px] text-gray-500">{description}</p>
+        <p className="text-[10px] text-gray-500">{lesson.about}</p>
       </div>
       <div>
-        <div className=" rounded-full p-2 border border-border">
+        <div className=" rounded-full p-1.5 border border-border">
           <ChevronRight
             size={16}
             strokeWidth={2}

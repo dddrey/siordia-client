@@ -33,7 +33,7 @@ export interface ITopic {
 export interface ILesson<T extends "preview" | "full"> {
   id: string;
   name: string;
-  number: number;
+  orderNumber: number;
   isCompleted: boolean;
   videoId: T extends "full" ? string : never;
   about: T extends "full" ? string : never;

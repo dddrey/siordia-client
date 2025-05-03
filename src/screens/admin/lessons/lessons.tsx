@@ -1,5 +1,5 @@
 import { FolderIcon, PlusIcon } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useLessons } from "@/shared/hooks/use-lessons";
 import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
@@ -9,7 +9,7 @@ import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const LessonsScreen = () => {
-  const { topicId } = useParams();
+  const [searchParams] = useSearchParams();
   const { setHapticFeedback } = useTelegram();
   useBackButton({
     isOpen: true,
@@ -18,10 +18,9 @@ const LessonsScreen = () => {
     data: lessons,
     isLoading,
     error,
-  } = useLessons({ topicId: topicId as string });
+  } = useLessons({ topicId: searchParams.get("topicId") as string });
 
   const onClick = () => {
-    console.log("click");
     setHapticFeedback();
   };
 

@@ -27,13 +27,15 @@ const HistoryCard = () => {
         damping: 20,
         duration: 0.5,
       }}
-      className="border-secondary max-w-[80%] ml-5 shadow-card-sm-light z-10 h-[50px] bg-primary w-full py-2 px-3 rounded-[12px] flex items-center gap-2"
+      className="border-secondary max-w-[80%] ml-5 shadow-card-sm-light z-10 h-[54px] bg-primary w-full py-2 px-3 rounded-[12px] flex items-center gap-2"
       onClick={handleClick}
     >
       <Avatar size="small" className="border border-border" />
       <div className="flex flex-1 flex-col justify-start items-start">
-        <p className="text-textPrimary text-[14px]">{lesson.name}</p>
-        <p className="text-gray-400 text-[10px]">Урок {lesson.number}.</p>
+        <p className="text-textPrimary text-[14px] truncate w-[140px]">
+          {lesson.name}
+        </p>
+        <p className="text-gray-400 text-[10px]">Урок.</p>
       </div>
       <div className="flex items-center justify-center rounded-full p-2 border border-border">
         <ChevronRight size={16} strokeWidth={2} className="text-textPrimary" />

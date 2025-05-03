@@ -15,11 +15,7 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       port: 5182,
       strictPort: true,
-      allowedHosts: [
-        "compare-enrollment-gm-thou.trycloudflare.com",
-        "siordia-client-production.up.railway.app",
-        "skill-up-football.xyz",
-      ],
+      allowedHosts: true,
       proxy: {
         "/api": {
           target: env.VITE_PRIVATE_API_URL,
@@ -33,13 +29,7 @@ export default defineConfig(({ mode }) => {
       port: 8080,
       host: "0.0.0.0",
       strictPort: true,
-      allowedHosts: [
-        "localhost",
-        "127.0.0.1",
-        "compare-enrollment-gm-thou.trycloudflare.com",
-        "siordia-client-production.up.railway.app",
-        "skill-up-football.xyz",
-      ],
+      allowedHosts: true,
     },
   };
 });
