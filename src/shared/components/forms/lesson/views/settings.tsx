@@ -52,6 +52,7 @@ export const SettingsView = ({
         error={errors.description}
         required
         disabled={isLoading || isSubmitting}
+        rows={12}
       />
 
       <FormField<LessonFormValues>

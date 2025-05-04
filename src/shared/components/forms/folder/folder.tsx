@@ -5,6 +5,7 @@ import { folderSchema } from "@/schema/folder.schema";
 import FormField from "@/shared/components/ui/form-field";
 import FormButton from "@/shared/components/ui/form-button";
 import FormSelect from "@/shared/components/ui/form-select";
+import FormTextArea from "../../ui/form-textarea";
 
 interface FolderFormProps {
   folder?: FolderFormValues;
@@ -56,7 +57,7 @@ const FolderForm = ({
         required
         disabled={isLoading || isSubmitting}
       />
-      <FormField<FolderFormValues>
+      <FormTextArea<FolderFormValues>
         id="description"
         label="Описание"
         placeholder="Введите описание"
@@ -64,6 +65,7 @@ const FolderForm = ({
         error={errors.description}
         required
         disabled={isLoading || isSubmitting}
+        rows={10}
       />
       <FormField<FolderFormValues>
         id="about"

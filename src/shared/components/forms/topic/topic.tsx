@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import FormField from "@/shared/components/ui/form-field";
 import FormButton from "@/shared/components/ui/form-button";
 import { TopicFormValues, topicSchema } from "@/schema/topic.schema";
+import FormTextArea from "../../ui/form-textarea";
 
 interface TopicFormProps {
   topic?: TopicFormValues;
@@ -55,7 +56,7 @@ const TopicForm = ({
         required
         disabled={isLoading || isSubmitting}
       />
-      <FormField<TopicFormValues>
+      <FormTextArea<TopicFormValues>
         id="description"
         label="Описание"
         placeholder="Введите описание"
@@ -63,6 +64,7 @@ const TopicForm = ({
         error={errors.description}
         required
         disabled={isLoading || isSubmitting}
+        rows={10}
       />
       <FormField<TopicFormValues>
         id="about"
