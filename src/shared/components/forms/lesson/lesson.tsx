@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { LessonFormValues, lessonSchema } from "@/schema/lesson.schema";
 import { LessonButtons } from "./buttons";
 import { LessonTasksView } from "./views/tasks";
@@ -29,6 +29,9 @@ const LessonForm = ({
   children,
   lessonId,
 }: LessonFormProps) => {
+  console.log("Initial lesson data:", lesson); // Проверяем начальные данные
+  console.log("Initial tasks:", lesson?.tasks); // Проверяем начальные задачи
+
   const [view, setView] = useState<FormView>("settings");
   const { setHapticFeedback } = useTelegram();
   const {
@@ -47,12 +50,38 @@ const LessonForm = ({
       description: lesson?.description || "",
       about: lesson?.about || "",
       video: "",
-      tasks: lesson?.tasks || [],
+      tasks:
+        lesson?.tasks?.map((task, index) => {
+          return {
+            name: task.name || "",
+            description: task.description || "",
+            index: task.index || index,
+          };
+        }) || [],
       isSubscriptionRequired: lesson?.isSubscriptionRequired ?? true,
     },
     mode: "onChange",
   });
   const { open } = usePreviewModalStore();
+
+  // Добавим наблюдение за всей формой
+  const formValues = watch();
+  console.log("Current form values:", formValues);
+
+  // Отдельно за tasks
+  const tasks = watch("tasks");
+  console.log("Current tasks:", tasks);
+
+  useEffect(() => {
+    // Если есть начальные данные, устанавливаем их принудительно
+    if (lesson?.tasks?.length) {
+      lesson.tasks.forEach((task, index) => {
+        setValue(`tasks.${index}.name`, task.name);
+        setValue(`tasks.${index}.description`, task.description);
+        setValue(`tasks.${index}.index`, task.index || index);
+      });
+    }
+  }, [lesson, setValue]);
 
   const handleViewChange = (view: FormView) => {
     setView(view);

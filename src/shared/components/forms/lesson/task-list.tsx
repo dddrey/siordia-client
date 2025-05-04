@@ -31,6 +31,8 @@ const TaskList = ({
     control,
   });
 
+  console.log("Fields in TaskList:", fields); // Проверяем поля в списке задач
+
   const onDragEnd = () => {
     console.log("drag end");
   };

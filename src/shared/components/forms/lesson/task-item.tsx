@@ -2,6 +2,8 @@ import { Trash2 } from "lucide-react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { LessonFormValues } from "@/schema/lesson.schema";
 import { DraggableProvided } from "react-beautiful-dnd";
+import FormField from "../../ui/form-field";
+import FormTextArea from "../../ui/form-textarea";
 
 interface TaskItemProps {
   index: number;
@@ -19,10 +21,18 @@ const TaskItem = ({
   errors,
   isLoading,
   isSubmitting,
+  provided,
   onRemove,
 }: TaskItemProps) => {
+  console.log("Rendering TaskItem with index:", index);
+
   return (
-    <div className="relative p-4 rounded-lg bg-primary shadow-card-sm-light">
+    <div
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={provided.innerRef}
+      className="relative p-4 rounded-lg bg-primary shadow-card-sm-light"
+    >
       <div className="flex items-center gap-4 mb-4">
         <h4 className="text-sm font-medium flex-grow text-textPrimary">
           Задание {index + 1}
@@ -42,10 +52,12 @@ const TaskItem = ({
           <label className="text-sm font-medium text-textPrimary">
             Название задания
           </label>
-          <input
-            {...register(`tasks.${index}.name` as const)}
+          <FormField<LessonFormValues>
+            id={`tasks.${index}.name`}
+            label="Название задания"
             placeholder="Введите название задания"
-            className="mt-1 w-full rounded-md border border-border bg-primary px-3 py-2 text-sm text-textPrimary outline-none focus:border-blue-500 placeholder:text-gray-500"
+            register={register}
+            error={errors.tasks?.[index]?.name}
             disabled={isLoading || isSubmitting}
           />
           {errors?.tasks?.[index]?.name && (
@@ -59,10 +71,12 @@ const TaskItem = ({
           <label className="text-sm font-medium text-textPrimary">
             Описание задания
           </label>
-          <textarea
-            {...register(`tasks.${index}.description` as const)}
+          <FormTextArea<LessonFormValues>
+            id={`tasks.${index}.description`}
+            label="Описание задания"
             placeholder="Введите описание задания"
-            className="mt-1 w-full rounded-md border border-border bg-primary px-3 py-2 text-sm text-textPrimary outline-none focus:border-blue-500 placeholder:text-gray-500 resize-none"
+            register={register}
+            error={errors.tasks?.[index]?.description}
             disabled={isLoading || isSubmitting}
             rows={3}
           />

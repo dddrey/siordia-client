@@ -17,12 +17,20 @@ class LessonsService {
     const response = await api.get(`/lessons/${lessonId}`, {
       params: { ContentType },
     });
-    console.log(response.data);
-    return response.data;
+    const tasks = response.data.lesson.tasks.map((task: any) =>
+      JSON.parse(task)
+    );
+    return {
+      ...response.data,
+      lesson: {
+        ...response.data.lesson,
+        tasks,
+      },
+    };
   }
 
   async createLesson(formData: FormData): Promise<ILesson<"full">> {
-    console.log(formData.get("video"));
+    console.log(formData);
     const response = await api.post(`/lessons`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
