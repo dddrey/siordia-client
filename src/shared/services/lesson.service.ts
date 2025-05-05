@@ -30,7 +30,6 @@ class LessonsService {
   }
 
   async createLesson(formData: FormData): Promise<ILesson<"full">> {
-    console.log(formData);
     const response = await api.post(`/lessons`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -41,12 +40,7 @@ class LessonsService {
   }
 
   async updateLesson(id: string, lesson: FormData): Promise<ILesson<"full">> {
-    console.log("lesson", lesson);
-    const response = await api.put(`/lessons/${id}`, lesson, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await api.put(`/lessons/${id}`, lesson);
     return response.data;
   }
 
