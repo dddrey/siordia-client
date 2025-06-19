@@ -13,6 +13,7 @@ import { useHistoryCardStore } from "@/shared/store/use-history-card";
 import withAuth from "@/shared/components/hoc/auth";
 import VideoPlayer from "@/shared/components/video-player";
 import useBackButton from "@/shared/hooks/use-backbutton";
+
 const LessonScreen = () => {
   const platform = window.Telegram?.WebApp?.platform;
 
@@ -84,6 +85,7 @@ const LessonScreen = () => {
         </div>
       )}
       {lesson.tasks && <TaskList tasks={lesson.tasks} />}
+      {lesson.tasks && <div className="h-[80px]"></div>}
     </ContentWrapper>
   );
 };

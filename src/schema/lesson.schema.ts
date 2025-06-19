@@ -24,7 +24,7 @@ export const lessonSchema = z.object({
   about: z
     .string()
     .min(2, "Короткое описание должно содержать минимум 2 символа")
-    .max(40, "Короткое описание не должно превышать 40 символов"),
+    .max(100, "Короткое описание не должно превышать 100 символов"),
   video: z.union([z.instanceof(File), z.string(), z.literal("")]),
   tasks: z.array(taskSchema),
   isSubscriptionRequired: z.boolean(),
