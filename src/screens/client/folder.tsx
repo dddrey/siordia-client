@@ -1,11 +1,8 @@
-"use client";
-
 import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useParams } from "react-router-dom";
 import { useFolder } from "@/shared/hooks/use-folders";
-import withAuth from "@/shared/components/hoc/auth";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FolderScreen = () => {
@@ -41,9 +38,4 @@ const FolderScreen = () => {
   );
 };
 
-FolderScreen.displayName = "FolderScreen";
-
-const WrappedFolderScreen = withAuth(FolderScreen) as React.FC;
-WrappedFolderScreen.displayName = "WrappedFolderScreen";
-
-export default WrappedFolderScreen;
+export default FolderScreen;

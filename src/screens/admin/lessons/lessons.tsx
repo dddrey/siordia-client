@@ -5,7 +5,6 @@ import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import ItemsList from "@/shared/components/items/items-list";
 import useTelegram from "@/shared/hooks/use-telegram";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const LessonsScreen = () => {
@@ -58,9 +57,4 @@ const LessonsScreen = () => {
   );
 };
 
-LessonsScreen.displayName = "LessonsScreen";
-
-const WrappedLessonsScreen = withAdmin(LessonsScreen) as React.FC;
-WrappedLessonsScreen.displayName = "WrappedLessonsScreen";
-
-export default WrappedLessonsScreen;
+export default LessonsScreen;

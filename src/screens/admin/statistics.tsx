@@ -1,4 +1,3 @@
-import withAdmin from "@/shared/components/hoc/admin";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useStatistics } from "@/shared/hooks/use-statistics";
 import { Eye, Users, CreditCard, BookOpen, Folder, Book } from "lucide-react";
@@ -116,9 +115,4 @@ const StatCard = ({ title, value, icon }: StatCardProps) => (
   </div>
 );
 
-StatisticsScreen.displayName = "StatisticsScreen";
-
-const WrappedStatisticsScreen = withAdmin(StatisticsScreen) as React.FC;
-WrappedStatisticsScreen.displayName = "WrappedStatisticsScreen";
-
-export default WrappedStatisticsScreen;
+export default StatisticsScreen;

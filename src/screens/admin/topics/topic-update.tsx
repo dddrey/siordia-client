@@ -10,8 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import FormButton from "@/shared/components/ui/form-button";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
+
 const TopicUpdateScreen = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useTopic(id as string);
@@ -95,9 +95,4 @@ const TopicUpdateScreen = () => {
   );
 };
 
-TopicUpdateScreen.displayName = "TopicUpdateScreen";
-
-const WrappedTopicUpdateScreen = withAdmin(TopicUpdateScreen) as React.FC;
-WrappedTopicUpdateScreen.displayName = "WrappedTopicUpdateScreen";
-
-export default WrappedTopicUpdateScreen;
+export default TopicUpdateScreen;

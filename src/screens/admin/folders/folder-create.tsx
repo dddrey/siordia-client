@@ -4,7 +4,6 @@ import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useCreateFolder } from "@/shared/hooks/use-folders";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FolderCreateScreen = () => {
@@ -46,9 +45,4 @@ const FolderCreateScreen = () => {
   );
 };
 
-FolderCreateScreen.displayName = "FolderCreateScreen";
-
-const WrappedFolderCreateScreen = withAdmin(FolderCreateScreen) as React.FC;
-WrappedFolderCreateScreen.displayName = "WrappedFolderCreateScreen";
-
-export default WrappedFolderCreateScreen;
+export default FolderCreateScreen;

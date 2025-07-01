@@ -2,7 +2,6 @@ import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { HeroSlider } from "@/shared/components/layout/main/hero-slider";
 import { useFolders } from "@/shared/hooks/use-folders";
 import { ContentType } from "@/shared/types/interfaces";
-import withAuth from "@/shared/components/hoc/auth";
 import ItemsList from "@/shared/components/items/items-list";
 import Loader from "@/shared/components/ui/loader";
 import { WelcomeHeader } from "@/shared/components/layout/main/welcome-header";
@@ -113,9 +112,4 @@ const MainScreen = () => {
   );
 };
 
-MainScreen.displayName = "MainScreen";
-
-const WrappedMainScreen = withAuth(MainScreen) as React.FC;
-WrappedMainScreen.displayName = "WrappedMainScreen";
-
-export default WrappedMainScreen;
+export default MainScreen;
