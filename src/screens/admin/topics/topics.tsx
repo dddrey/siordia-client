@@ -1,4 +1,3 @@
-import withAdmin from "@/shared/components/hoc/admin";
 import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
@@ -57,9 +56,4 @@ const TopicsScreen = () => {
   );
 };
 
-TopicsScreen.displayName = "TopicsScreen";
-
-const WrappedTopicsScreen = withAdmin(TopicsScreen) as React.FC;
-WrappedTopicsScreen.displayName = "WrappedTopicsScreen";
-
-export default WrappedTopicsScreen;
+export default TopicsScreen;

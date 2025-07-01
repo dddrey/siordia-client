@@ -1,7 +1,7 @@
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { motion } from "framer-motion";
-import withAuth from "@/shared/components/hoc/auth";
 import useBackButton from "@/shared/hooks/use-backbutton";
+
 const AboutScreen = () => {
   useBackButton({
     isOpen: true,
@@ -88,9 +88,4 @@ const AboutScreen = () => {
   );
 };
 
-AboutScreen.displayName = "AboutScreen";
-
-const WrappedAboutScreen = withAuth(AboutScreen) as React.FC;
-WrappedAboutScreen.displayName = "WrappedAboutScreen";
-
-export default WrappedAboutScreen;
+export default AboutScreen;

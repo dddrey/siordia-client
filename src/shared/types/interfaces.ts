@@ -56,6 +56,8 @@ export interface User {
   subscriptions: ISubscription[];
   username: string;
   avatarUrl?: string;
+  registrationDate: Date;
+  chatId: string;
 }
 
 export interface ISubscription {
@@ -72,6 +74,14 @@ export interface UserStatistics {
   total: number;
   withSubscriptions: number;
   admins: number;
+}
+
+// Статистика пользователей для рассылок
+export interface UserStats {
+  totalUsers: number;
+  activeUsers: number;
+  usersWithChatId: number;
+  availableForBroadcast: number;
 }
 
 // Статистика по контенту
@@ -99,7 +109,53 @@ export interface IStatistics {
     totalLessons: number;
     activeSubscriptions: number;
   };
-  viewsStatistics: Record<ContentType, number>; // Количество просмотров по типам контента
-  subscriptionsByType: Record<ContentType, number>; // Количество подписок по типам
-  topLessons: ILesson<"preview">[]; // Топ-5 самых просматриваемых уроков
+  viewsStatistics: Record<ContentType, number>;
+  subscriptionsByType: Record<ContentType, number>;
+  topLessons: ILesson<"preview">[];
+}
+
+export enum BroadcastStatus {
+  PENDING = "PENDING",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED",
+  FAILED = "FAILED",
+  CANCELLED = "CANCELLED",
+}
+
+export interface Broadcast {
+  id: string;
+  status: BroadcastStatus;
+
+  text: string;
+  imageUrl: string | null;
+  buttonText: string | null;
+  buttonUrl: string | null;
+  parseMode: string | null;
+  disableWebPreview: boolean;
+
+  delayMs: number;
+  skipInactive: boolean;
+  retryOnRateLimit: boolean;
+
+  totalUsers: number;
+  successCount: number;
+  errorCount: number;
+  skippedCount: number;
+
+  errorLog: any[];
+
+  createdAt: Date;
+  startedAt: Date | null;
+  completedAt: Date | null;
+}
+
+export interface UsersResponse {
+  all: User[];
+  available: User[];
+}
+
+export interface GetAllBroadcastsResponse {
+  broadcasts: Broadcast[];
+  users: UsersResponse;
+  stats: UserStats;
 }

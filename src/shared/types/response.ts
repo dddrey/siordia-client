@@ -1,4 +1,4 @@
-import { ILesson, ITopic } from "./interfaces";
+import { Broadcast, ILesson, ITopic, User, UserStats } from "./interfaces";
 
 export interface GetLesson {
   lesson: ILesson<"full">;
@@ -26,4 +26,15 @@ export interface GetTopic {
 export interface PaymentResponse {
   success: boolean;
   data: string;
+}
+
+export interface UsersResponse {
+  all: User[];
+  available: User[];
+  stats: UserStats;
+}
+
+export interface GetAllBroadcastsResponse {
+  broadcasts: Broadcast[];
+  users: UsersResponse;
 }

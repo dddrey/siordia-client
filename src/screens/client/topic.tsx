@@ -1,18 +1,31 @@
-import withAuth from "@/shared/components/hoc/auth";
 import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
+import SubNotify from "@/shared/components/layout/topic/sub-notify";
 import useBackButton from "@/shared/hooks/use-backbutton";
 import { useTopic } from "@/shared/hooks/use-topics";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const TopicScreen = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useTopic(id as string);
+  const [showNotification, setShowNotification] = useState(false);
 
   useBackButton({
     isOpen: true,
   });
+
+  // Показываем уведомление когда нет доступа
+  useEffect(() => {
+    if (data && !data.isHavePermission) {
+      setShowNotification(true);
+    }
+  }, [data]);
+
+  const handleNotificationComplete = () => {
+    setShowNotification(false);
+  };
 
   return (
     <ContentWrapper withFooter={false} className="pt-safe-area">
@@ -37,13 +50,13 @@ const TopicScreen = () => {
         type="permission"
         params={`/?type=${data?.topic.type}`}
       />
+
+      <SubNotify
+        show={showNotification}
+        onComplete={handleNotificationComplete}
+      />
     </ContentWrapper>
   );
 };
 
-TopicScreen.displayName = "TopicScreen";
-
-const WrappedTopicScreen = withAuth(TopicScreen) as React.FC;
-WrappedTopicScreen.displayName = "WrappedTopicScreen";
-
-export default WrappedTopicScreen;
+export default TopicScreen;

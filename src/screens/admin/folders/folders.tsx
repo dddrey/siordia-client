@@ -1,4 +1,3 @@
-import withAdmin from "@/shared/components/hoc/admin";
 import ItemsList from "@/shared/components/items/items-list";
 import LogoImage from "@/shared/components/logo-Image";
 import TypeFilter from "@/shared/components/ui/type-filter";
@@ -73,9 +72,4 @@ const FoldersScreen = () => {
   );
 };
 
-FoldersScreen.displayName = "FoldersScreen";
-
-const WrappedFoldersScreen = withAdmin(FoldersScreen) as React.FC;
-WrappedFoldersScreen.displayName = "WrappedFoldersScreen";
-
-export default WrappedFoldersScreen;
+export default FoldersScreen;

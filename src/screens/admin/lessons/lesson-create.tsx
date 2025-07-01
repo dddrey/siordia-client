@@ -6,7 +6,6 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import LessonChoose from "@/shared/components/choose/lesson";
 import { useSearchParams } from "react-router-dom";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const LessonCreateScreen = () => {
@@ -75,9 +74,4 @@ const LessonCreateScreen = () => {
   );
 };
 
-LessonCreateScreen.displayName = "LessonCreateScreen";
-
-const WrappedLessonCreateScreen = withAdmin(LessonCreateScreen) as React.FC;
-WrappedLessonCreateScreen.displayName = "WrappedLessonCreateScreen";
-
-export default WrappedLessonCreateScreen;
+export default LessonCreateScreen;

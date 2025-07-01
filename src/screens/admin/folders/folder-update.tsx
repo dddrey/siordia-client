@@ -10,8 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
+import { handleOpenAppLink } from "@/shared/utils/uri-links";
 
 const FolderUpdateScreen = () => {
   const { id } = useParams();
@@ -91,14 +91,17 @@ const FolderUpdateScreen = () => {
         >
           Темы папки
         </FormButton>
+        <FormButton
+          type="button"
+          onClick={() => handleOpenAppLink(`/topics?folderId=${id}`)}
+          variant="create"
+          className="w-full"
+        >
+          Открыть в приложении
+        </FormButton>
       </FolderForm>
     </ContentWrapper>
   );
 };
 
-FolderUpdateScreen.displayName = "FolderUpdateScreen";
-
-const WrappedFolderUpdateScreen = withAdmin(FolderUpdateScreen) as React.FC;
-WrappedFolderUpdateScreen.displayName = "WrappedFolderUpdateScreen";
-
-export default WrappedFolderUpdateScreen;
+export default FolderUpdateScreen;
