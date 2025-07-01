@@ -16,10 +16,6 @@ const BroadcastsAdmin = () => {
   const { mutate: startBroadcast } = useStartBroadcast();
   const navigate = useNavigate();
 
-  const handleBroadcastClick = (id: string) => {
-    navigate(`/admin/broadcast/${id}`);
-  };
-
   const handleCreateBroadcast = () => {
     navigate("/admin/broadcast/create");
   };
