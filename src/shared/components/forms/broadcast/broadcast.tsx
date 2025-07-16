@@ -5,9 +5,10 @@ import { BroadcastFormValues, broadcastSchema } from "@/schema/broadcast.shema";
 import FormTextArea from "@/shared/components/ui/form-textarea";
 import FormButton from "@/shared/components/ui/form-button";
 import FormField from "../../ui/form-field";
+import { Broadcast } from "@/shared/types/interfaces";
 
 interface BroadcastFormProps {
-  broadcast?: BroadcastFormValues;
+  broadcast?: Broadcast;
   onSubmit: (data: BroadcastFormValues) => Promise<void>;
   handleTestBroadcast: (data: BroadcastFormValues) => Promise<void>;
   isLoading?: boolean;
@@ -107,7 +108,7 @@ const BroadcastForm = ({
         <FormButton
           type="button"
           variant="create"
-          disabled={!isDirty || !isValid || isLoading || isSubmitting}
+          disabled={!isValid || isLoading || isSubmitting}
           className="w-full"
           onClick={() => handleTestBroadcast(getValues())}
         >

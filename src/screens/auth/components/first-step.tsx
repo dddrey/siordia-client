@@ -1,15 +1,23 @@
-import PhoneFrame from "@/shared/components/ui/phone-frame";
+import { useEffect } from "react";
+import { useAuthNavigation } from "@/shared/hooks/use-auth-navigation";
 
 const FirstStep = () => {
+  const { setStepValid } = useAuthNavigation();
+
+  // Устанавливаем валидность шага при монтировании
+  useEffect(() => {
+    setStepValid(true);
+  }, [setStepValid]);
+
   return (
-    <PhoneFrame>
-      <div className="text-center">
-        <h3 className="text-sm font-semibold text-gray-700 mb-2">Первый шаг</h3>
-        <p className="text-xs text-gray-500">
-          Содержимое будет добавлено позже
-        </p>
-      </div>
-    </PhoneFrame>
+    <div className="flex flex-col h-full px-4 mt-2">
+      <p className="text-5xl font-semibold text-textAccent mb-2">
+        Добро пожаловать в Kickstart Go!
+      </p>
+      <p className="text-xl text-textSecondary">
+        Приложение для футбольных тренеровок
+      </p>
+    </div>
   );
 };
 

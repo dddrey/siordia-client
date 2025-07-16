@@ -1,27 +1,23 @@
 import FormButton from "@/shared/components/ui/form-button";
-import { Play } from "lucide-react";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
-import {
-  useGetBroadcastList,
-  useStartBroadcast,
-} from "@/shared/hooks/use-broadcast";
+import { useGetBroadcastList } from "@/shared/hooks/use-broadcast";
 import { BroadcastStatus } from "@/shared/types/interfaces";
 import { CheckCircle, Clock, Plus, Users, XCircle } from "lucide-react";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const BroadcastsAdmin = () => {
+  useBackButton({
+    isOpen: true,
+  });
   const { data: response, isLoading, error } = useGetBroadcastList();
-  const { mutate: startBroadcast } = useStartBroadcast();
   const navigate = useNavigate();
 
   const handleCreateBroadcast = () => {
     navigate("/admin/broadcast/create");
-  };
-
-  const handleStartBroadcast = (id: string) => {
-    startBroadcast(id);
   };
 
   const getStatusColor = (status: BroadcastStatus) => {
@@ -61,7 +57,7 @@ const BroadcastsAdmin = () => {
   if (isLoading) {
     return (
       <ContentWrapper
-        className="pt-safe-area flex flex-col justify-center"
+        className="flex flex-col justify-center"
         withFooter={false}
       >
         <LoadingOverview />
@@ -72,7 +68,7 @@ const BroadcastsAdmin = () => {
   if (error) {
     return (
       <ContentWrapper
-        className="pt-safe-area flex flex-col justify-center"
+        className="flex flex-col justify-center"
         withFooter={false}
       >
         <ErrorComponent
@@ -146,67 +142,51 @@ const BroadcastsAdmin = () => {
             </div>
           ) : (
             broadcasts.map((broadcast) => (
-              <div
+              <Link
+                to={`/admin/broadcast/${broadcast.id}`}
                 key={broadcast.id}
-                className="bg-secondary rounded-lg border border-border p-4 space-y-3 cursor-pointer"
+                className="w-full block"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <p className="text-sm text-white mt-1 line-clamp-2">
-                      {broadcast.text}
-                    </p>
-                  </div>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                      broadcast.status
-                    )}`}
-                  >
-                    {getStatusText(broadcast.status)}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between text-xs text-gray-500 pt-2">
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1 text-white">
-                      <Users className="h-4 w-4" />
-                      <span>{broadcast.totalUsers}</span>
+                <div className="bg-secondary rounded-lg border border-border p-4 space-y-3 cursor-pointer">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="text-sm text-white mt-1 line-clamp-2">
+                        {broadcast.text}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-1 text-green-600">
-                      <CheckCircle className="h-4 w-4" />
-                      <span>{broadcast.successCount}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-red-600">
-                      <XCircle className="h-4 w-4" />
-                      <span>{broadcast.errorCount}</span>
-                    </div>
-                    {broadcast.skippedCount > 0 && (
-                      <div className="flex items-center gap-1 text-yellow-600">
-                        <Clock className="h-4 w-4" />
-                        <span>{broadcast.skippedCount}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {broadcast.status === BroadcastStatus.PENDING && (
-                    <div
-                      className="flex items-center gap-1 cursor-pointer"
-                      onClick={(e) => e.stopPropagation()}
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                        broadcast.status
+                      )}`}
                     >
-                      <FormButton
-                        type="button"
-                        variant="update"
-                        className="flex items-center gap-1 text-xs px-3 py-1"
-                        onClick={() => {
-                          handleStartBroadcast(broadcast.id);
-                        }}
-                      >
-                        <Play className="h-3 w-3" />
-                        Запустить
-                      </FormButton>
+                      {getStatusText(broadcast.status)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-gray-500 pt-2">
+                    <div className="flex items-center gap-4 text-sm">
+                      <div className="flex items-center gap-1 text-white">
+                        <Users className="h-4 w-4" />
+                        <span>{broadcast.totalUsers}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-600">
+                        <CheckCircle className="h-4 w-4" />
+                        <span>{broadcast.successCount}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-red-600">
+                        <XCircle className="h-4 w-4" />
+                        <span>{broadcast.errorCount}</span>
+                      </div>
+                      {broadcast.skippedCount > 0 && (
+                        <div className="flex items-center gap-1 text-yellow-600">
+                          <Clock className="h-4 w-4" />
+                          <span>{broadcast.skippedCount}</span>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>

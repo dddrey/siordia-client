@@ -2,19 +2,28 @@ import { BroadcastFormValues } from "@/schema/broadcast.shema";
 import ErrorComponent from "@/shared/components/error";
 import BroadcastForm from "@/shared/components/forms/broadcast/broadcast";
 import LoadingOverview from "@/shared/components/loading-overview";
+import FormButton from "@/shared/components/ui/form-button";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
+import useBackButton from "@/shared/hooks/use-backbutton";
 import {
   useGetBroadcast,
-  useStartBroadcast,
+  useDeleteBroadcast,
   useTestBroadcast,
+  useUpdateBroadcast,
 } from "@/shared/hooks/use-broadcast";
 import { useParams } from "react-router-dom";
 
-export default function BroadcastStart() {
+export default function BroadcastUpdate() {
+  useBackButton({
+    isOpen: true,
+  });
   const { id } = useParams();
-  const { mutate: startBroadcast, isPending: isLoading } = useStartBroadcast();
   const { mutate: testBroadcast, isPending: isTestLoading } =
     useTestBroadcast();
+  const { mutate: updateBroadcast, isPending: isUpdateLoading } =
+    useUpdateBroadcast();
+  const { mutate: deleteBroadcast, isPending: isDeleteLoading } =
+    useDeleteBroadcast();
   const {
     data: broadcast,
     isLoading: isLoadingBroadcast,
@@ -23,8 +32,14 @@ export default function BroadcastStart() {
 
   console.log(id);
 
-  const handleSubmit = async () => {
-    startBroadcast(id || "");
+  const handleDelete = () => {
+    deleteBroadcast(id || "");
+  };
+
+  const handleUpdate = async (data: BroadcastFormValues) => {
+    if (id) {
+      updateBroadcast({ id, data });
+    }
   };
 
   const handleTestBroadcast = async (data: BroadcastFormValues) => {
@@ -53,16 +68,27 @@ export default function BroadcastStart() {
     );
 
   return (
-    <ContentWrapper
-      withFooter={false}
-      className="pt-safe-area flex flex-col justify-center"
-    >
+    <ContentWrapper withFooter={false} className="flex flex-col justify-center">
       <BroadcastForm
-        onSubmit={handleSubmit}
-        isLoading={isLoading || isTestLoading}
+        onSubmit={handleUpdate}
+        broadcast={broadcast}
+        isLoading={isUpdateLoading || isTestLoading}
         title="Начать рассылку"
         handleTestBroadcast={handleTestBroadcast}
-      />
+      >
+        <FormButton
+          type="button"
+          onClick={handleDelete}
+          variant="delete"
+          className="w-full"
+          isLoading={isDeleteLoading}
+        >
+          Удалить рассылку
+        </FormButton>
+        <FormButton type="button" variant="update" className="w-full">
+          Протестировать рассылку
+        </FormButton>
+      </BroadcastForm>
     </ContentWrapper>
   );
 }

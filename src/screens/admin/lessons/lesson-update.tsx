@@ -11,6 +11,7 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
 import useBackButton from "@/shared/hooks/use-backbutton";
+import { handleOpenAppLink } from "@/shared/utils/uri-links";
 
 const LessonUpdateScreen = () => {
   const { id } = useParams();
@@ -88,6 +89,14 @@ const LessonUpdateScreen = () => {
           className="w-full"
         >
           Удалить урок
+        </FormButton>
+        <FormButton
+          type="button"
+          onClick={() => handleOpenAppLink(`/lesson/${id}`)}
+          variant="create"
+          className="w-full"
+        >
+          Открыть в приложении
         </FormButton>
       </LessonForm>
     </ContentWrapper>

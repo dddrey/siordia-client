@@ -26,7 +26,7 @@ export const useUpdateUser = () => {
       await navigate("/");
     },
     onError: () => {
-      toast.error("Произошла ошибка при обновлении данных");
+      toast.error("Вы не подключили бота");
     },
   });
 };

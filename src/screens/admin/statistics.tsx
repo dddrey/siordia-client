@@ -1,9 +1,21 @@
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import { useStatistics } from "@/shared/hooks/use-statistics";
-import { Eye, Users, CreditCard, BookOpen, Folder, Book } from "lucide-react";
+import {
+  Eye,
+  Users,
+  CreditCard,
+  BookOpen,
+  Folder,
+  Book,
+  Home,
+  CreditCard as SubscriptionIcon,
+  Info,
+  GraduationCap,
+} from "lucide-react";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import useBackButton from "@/shared/hooks/use-backbutton";
+import { handleOpenAppLink } from "@/shared/utils/uri-links";
 
 const StatisticsScreen = () => {
   const { data, isLoading, error } = useStatistics();
@@ -93,6 +105,39 @@ const StatisticsScreen = () => {
               Нет популярных уроков
             </p>
           )}
+        </div>
+      </section>
+      <section className="bg-primary text-textPrimary shadow-card-sm-light rounded-[10px] p-4 mt-3 w-[94%] mx-auto">
+        <h3 className="text-lg font-semibold mb-3">Ссылки на приложения</h3>
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={() => handleOpenAppLink("/")}
+            className="bg-bgSecondary hover:bg-bgSecondary/80 transition-colors duration-200 text-textPrimary rounded-[10px] p-3 flex items-center gap-3 border border-borderPrimary/10"
+          >
+            <Home size={20} />
+            <span className="text-[16px] font-medium">Главная</span>
+          </button>
+          <button
+            onClick={() => handleOpenAppLink("/subscriptions")}
+            className="bg-bgSecondary hover:bg-bgSecondary/80 transition-colors duration-200 text-textPrimary rounded-[10px] p-3 flex items-center gap-3 border border-borderPrimary/10"
+          >
+            <SubscriptionIcon size={20} />
+            <span className="text-[16px] font-medium">Подписки</span>
+          </button>
+          <button
+            onClick={() => handleOpenAppLink("/about")}
+            className="bg-bgSecondary hover:bg-bgSecondary/80 transition-colors duration-200 text-textPrimary rounded-[10px] p-3 flex items-center gap-3 border border-borderPrimary/10"
+          >
+            <Info size={20} />
+            <span className="text-[16px] font-medium">О нас</span>
+          </button>
+          <button
+            onClick={() => handleOpenAppLink("/school")}
+            className="bg-bgSecondary hover:bg-bgSecondary/80 transition-colors duration-200 text-textPrimary rounded-[10px] p-3 flex items-center gap-3 border border-borderPrimary/10"
+          >
+            <GraduationCap size={20} />
+            <span className="text-[16px] font-medium">Школа</span>
+          </button>
         </div>
       </section>
     </ContentWrapper>

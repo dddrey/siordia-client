@@ -17,6 +17,19 @@ class BroadcastService {
     return response.data;
   }
 
+  async deleteBroadcast(id: string): Promise<Broadcast> {
+    const response = await api.delete(`/broadcast/${id}`);
+    return response.data;
+  }
+
+  async updateBroadcast(
+    id: string,
+    data: BroadcastFormValues
+  ): Promise<Broadcast> {
+    const response = await api.put(`/broadcast/${id}`, data);
+    return response.data;
+  }
+
   async getBroadcast(id: string): Promise<Broadcast> {
     console.log(id);
     const response = await api.get(`/broadcast/${id}`);

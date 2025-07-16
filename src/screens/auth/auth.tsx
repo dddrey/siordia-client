@@ -1,27 +1,39 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
-import AuthNavigation from "./components/auth-navigation";
 import FirstStep from "./components/first-step";
-import FifthStep from "./components/fifth-step";
-import ThirdStep from "./components/third-step";
-import FourthStep from "./components/fourth-step";
 import SecondStep from "./components/second-step";
+import ThirdStep from "./components/third-step";
+import { MainButtonProvider } from "@/shared/components/wrappers/main-button";
+import {
+  useAuthNavigation,
+  useCurrentStep,
+  useCanGoNext,
+  useIsLoading,
+  useIsLastStep,
+} from "@/shared/hooks/use-auth-navigation";
+import useBackButton from "@/shared/hooks/use-backbutton";
+import { useUser, useUpdateUser } from "@/shared/hooks/use-user";
 
 const Auth = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const totalSteps = 5;
+  const currentStep = useCurrentStep();
+  const canGoNext = useCanGoNext();
+  const isLoading = useIsLoading();
+  const isLastStep = useIsLastStep();
+  const { nextStep, reset, prevStep } = useAuthNavigation();
+  const { data: user } = useUser();
+  const updateUser = useUpdateUser();
 
-  const nextStep = () => {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
+  useBackButton({
+    func: prevStep,
+    isOpen: currentStep > 0,
+  });
 
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+  useEffect(() => {
+    reset();
+    return () => {
+      reset();
+    };
+  }, [reset]);
 
   const renderCurrentStep = () => {
     switch (currentStep) {
@@ -31,29 +43,49 @@ const Auth = () => {
         return <SecondStep />;
       case 2:
         return <ThirdStep />;
-      case 3:
-        return <FourthStep />;
-      case 4:
-        return <FifthStep />;
       default:
         return <FirstStep />;
     }
   };
 
+  const getButtonText = () => {
+    if (isLastStep) {
+      return user?.chatId ? "Продолжить" : "Подключить";
+    }
+
+    return "Далее";
+  };
+
+  const handleButtonClick = () => {
+    if (isLastStep) {
+      updateUser.mutate();
+    } else {
+      nextStep();
+    }
+  };
+
+  // Для последнего шага кнопка всегда валидна, для остальных - используем canGoNext
+  const isButtonValid = isLastStep ? true : canGoNext;
+
   return (
     <ContentWrapper
       withFooter={false}
       withLayout={false}
-      className="pt-safe-area flex flex-col items-center justify-center h-full"
+      className="pt-safe-area flex flex-col h-screen"
     >
-      <AuthNavigation
-        currentStep={currentStep}
-        totalSteps={totalSteps}
-        onNext={nextStep}
-        onPrev={prevStep}
-      />
-
-      {renderCurrentStep()}
+      <MainButtonProvider
+        isVisible={true}
+        isLoading={isLoading || updateUser.isPending}
+        variant="default"
+        onClick={handleButtonClick}
+        isValid={isButtonValid}
+        isStatic={true}
+        text={getButtonText()}
+      >
+        <div className="flex-1 flex flex-col items-center justify-center">
+          {renderCurrentStep()}
+        </div>
+      </MainButtonProvider>
     </ContentWrapper>
   );
 };

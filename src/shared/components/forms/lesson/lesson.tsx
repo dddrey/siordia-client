@@ -105,7 +105,7 @@ const LessonForm = ({
       />
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="relative flex flex-col gap-4 mx-auto w-full max-w-[94%] mt-safe-area pt-[30px] mb-[30px]"
+        className="relative flex flex-col gap-1 mx-auto w-full max-w-[94%] mt-safe-area pt-[30px] mb-[30px]"
       >
         <AnimatePresence mode="wait">
           <SettingsView

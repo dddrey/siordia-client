@@ -65,7 +65,10 @@ const FolderUpdateScreen = () => {
     );
 
   return (
-    <ContentWrapper className="flex flex-col justify-center" withFooter={false}>
+    <ContentWrapper
+      className="flex flex-col justify-center pt-safe-area"
+      withFooter={false}
+    >
       <FolderForm onSubmit={handleSubmit} folder={folder}>
         <FormButton
           type="button"
@@ -93,7 +96,7 @@ const FolderUpdateScreen = () => {
         </FormButton>
         <FormButton
           type="button"
-          onClick={() => handleOpenAppLink(`/topics?folderId=${id}`)}
+          onClick={() => handleOpenAppLink(`/topics/${id}`)}
           variant="create"
           className="w-full"
         >

@@ -41,13 +41,53 @@ export const useCreateBroadcast = () => {
   return useMutation<Broadcast, Error, BroadcastFormValues>({
     mutationFn: (data: BroadcastFormValues) =>
       broadcastService.createBroadcast(data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["broadcastList"] });
       navigate(`/admin/broadcasts`);
       toast.success("Рассылка успешно создана");
     },
+
     onError: () => {
       toast.error("Произошла ошибка при создании рассылки");
+    },
+  });
+};
+
+export const useDeleteBroadcast = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation<Broadcast, Error, string>({
+    mutationFn: (id: string) => broadcastService.deleteBroadcast(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: ["broadcastList"] });
+      queryClient.invalidateQueries({ queryKey: ["broadcast", id] });
+      toast.success("Рассылка успешно удалена");
+      navigate(`/admin/broadcasts`);
+    },
+    onError: () => {
+      toast.error("Произошла ошибка при удалении рассылки");
+    },
+  });
+};
+
+export const useUpdateBroadcast = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation<
+    Broadcast,
+    Error,
+    { id: string; data: BroadcastFormValues }
+  >({
+    mutationFn: ({ id, data }) => broadcastService.updateBroadcast(id, data),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ["broadcastList"] });
+      queryClient.invalidateQueries({ queryKey: ["broadcast", id] });
+      toast.success("Рассылка успешно обновлена");
+      navigate(`/admin/broadcasts`);
+    },
+    onError: () => {
+      toast.error("Произошла ошибка при обновлении рассылки");
     },
   });
 };

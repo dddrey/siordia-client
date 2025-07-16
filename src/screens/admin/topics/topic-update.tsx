@@ -11,6 +11,7 @@ import FormButton from "@/shared/components/ui/form-button";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import useBackButton from "@/shared/hooks/use-backbutton";
+import { handleOpenAppLink } from "@/shared/utils/uri-links";
 
 const TopicUpdateScreen = () => {
   const { id } = useParams();
@@ -89,6 +90,14 @@ const TopicUpdateScreen = () => {
           className="w-full"
         >
           Уроки темы
+        </FormButton>
+        <FormButton
+          type="button"
+          onClick={() => handleOpenAppLink(`/topics/${id}`)}
+          variant="create"
+          className="w-full"
+        >
+          Открыть в приложении
         </FormButton>
       </TopicForm>
     </ContentWrapper>

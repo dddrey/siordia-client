@@ -5,8 +5,12 @@ import {
   useCreateBroadcast,
   useTestBroadcast,
 } from "@/shared/hooks/use-broadcast";
+import useBackButton from "@/shared/hooks/use-backbutton";
 
 const BroadcastCreate = () => {
+  useBackButton({
+    isOpen: true,
+  });
   const { mutate: createBroadcast, isPending: isLoading } =
     useCreateBroadcast();
   const { mutate: testBroadcast, isPending: isTestLoading } =
@@ -31,10 +35,7 @@ const BroadcastCreate = () => {
   };
 
   return (
-    <ContentWrapper
-      withFooter={false}
-      className="pt-safe-area flex flex-col justify-center"
-    >
+    <ContentWrapper withFooter={false} className="flex flex-col justify-center">
       <BroadcastForm
         onSubmit={handleSubmit}
         isLoading={isLoading || isTestLoading}
