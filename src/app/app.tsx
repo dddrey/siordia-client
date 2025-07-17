@@ -5,13 +5,6 @@ import { TelegramWrapper } from "@/shared/components/wrappers/telegram-wrapper";
 import { useEffect } from "react";
 
 function App() {
-  useEffect(() => {
-    console.log("APP_URL", import.meta.env.VITE_APP);
-    console.log("VITE_APP_URL", import.meta.env.VITE_APP_URL);
-    console.log("VITE_BOT_URL", import.meta.env.VITE_BOT_URL);
-    console.log("VITE_MINI_APP_URL", import.meta.env.VITE_MINI_APP_URL);
-    console.log("VITE_PRIVATE_API_URL", import.meta.env.VITE_PRIVATE_API_URL);
-  }, []);
   return (
     <QueryProvider>
       <TelegramWrapper>
