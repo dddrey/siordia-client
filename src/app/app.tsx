@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    console.log(import.meta.env.VITE_MINI_APP_URL);
+    console.log("APP_URL", import.meta.env.VITE_MINI_APP_URL);
   }, []);
   return (
     <QueryProvider>
