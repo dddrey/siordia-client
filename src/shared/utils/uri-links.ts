@@ -8,8 +8,8 @@ export const handleOpenAppLink = (path: string) => {
   const payload = JSON.stringify({ path });
 
   const encodedPayload = btoa(payload);
-
   const shareUrl = `${import.meta.env.VITE_APP_URL}?startapp=${encodedPayload}`;
+  console.log(shareUrl);
 
   navigator.clipboard
     .writeText(shareUrl)
