@@ -8,7 +8,7 @@ export const handleOpenAppLink = (path: string) => {
   const payload = JSON.stringify({ path });
 
   const encodedPayload = btoa(payload);
-  const shareUrl = `${import.meta.env.VITE_MINI_APP_URL}?startapp=${encodedPayload}`;
+  const shareUrl = `${import.meta.env.VITE_APP}?startapp=${encodedPayload}`;
   console.log(shareUrl);
 
   navigator.clipboard
