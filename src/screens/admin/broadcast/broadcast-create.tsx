@@ -19,7 +19,7 @@ const BroadcastCreate = () => {
   const handleSubmit = async (data: BroadcastFormValues) => {
     createBroadcast({
       text: data.text,
-      imageUrl: data.imageUrl,
+      fileId: data.fileId,
       buttonText: data.buttonText,
       buttonUrl: data.buttonUrl,
     });
@@ -28,7 +28,7 @@ const BroadcastCreate = () => {
   const handleTestBroadcast = async (data: BroadcastFormValues) => {
     testBroadcast({
       text: data.text,
-      imageUrl: data.imageUrl,
+      fileId: data.fileId,
       buttonText: data.buttonText,
       buttonUrl: data.buttonUrl,
     });

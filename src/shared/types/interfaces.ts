@@ -127,7 +127,7 @@ export interface Broadcast {
   status: BroadcastStatus;
 
   text: string;
-  imageUrl: string | null;
+  fileId: string | null;
   buttonText: string | null;
   buttonUrl: string | null;
   parseMode: string | null;

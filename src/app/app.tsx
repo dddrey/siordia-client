@@ -2,7 +2,6 @@ import QueryProvider from "./providers/query/query-provider";
 import Router from "./router";
 import { Toaster } from "react-hot-toast";
 import { TelegramWrapper } from "@/shared/components/wrappers/telegram-wrapper";
-import { useEffect } from "react";
 
 function App() {
   return (

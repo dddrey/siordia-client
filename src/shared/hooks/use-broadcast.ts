@@ -22,9 +22,11 @@ export const useGetBroadcastList = () => {
 
 export const useStartBroadcast = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return useMutation<Broadcast, Error, string>({
     mutationFn: (id: string) => broadcastService.startBroadcast(id),
     onSuccess: (_, id) => {
+      navigate(`/admin/broadcasts`);
       queryClient.invalidateQueries({ queryKey: ["broadcastList"] });
       queryClient.invalidateQueries({ queryKey: ["broadcast", id] });
       toast.success("Рассылка успешно запущена");

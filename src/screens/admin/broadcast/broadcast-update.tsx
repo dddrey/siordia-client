@@ -10,7 +10,9 @@ import {
   useDeleteBroadcast,
   useTestBroadcast,
   useUpdateBroadcast,
+  useStartBroadcast,
 } from "@/shared/hooks/use-broadcast";
+import { BroadcastStatus } from "@/shared/types/interfaces";
 import { useParams } from "react-router-dom";
 
 export default function BroadcastUpdate() {
@@ -24,6 +26,8 @@ export default function BroadcastUpdate() {
     useUpdateBroadcast();
   const { mutate: deleteBroadcast, isPending: isDeleteLoading } =
     useDeleteBroadcast();
+  const { mutate: startBroadcast, isPending: isStartLoading } =
+    useStartBroadcast();
   const {
     data: broadcast,
     isLoading: isLoadingBroadcast,
@@ -36,6 +40,10 @@ export default function BroadcastUpdate() {
     deleteBroadcast(id || "");
   };
 
+  const handleStartBroadcast = () => {
+    startBroadcast(id || "");
+  };
+
   const handleUpdate = async (data: BroadcastFormValues) => {
     if (id) {
       updateBroadcast({ id, data });
@@ -45,7 +53,7 @@ export default function BroadcastUpdate() {
   const handleTestBroadcast = async (data: BroadcastFormValues) => {
     testBroadcast({
       text: data.text,
-      imageUrl: data.imageUrl,
+      fileId: data.fileId,
       buttonText: data.buttonText,
       buttonUrl: data.buttonUrl,
     });
@@ -72,7 +80,7 @@ export default function BroadcastUpdate() {
       <BroadcastForm
         onSubmit={handleUpdate}
         broadcast={broadcast}
-        isLoading={isUpdateLoading || isTestLoading}
+        isLoading={isUpdateLoading || isTestLoading || isStartLoading}
         title="Начать рассылку"
         handleTestBroadcast={handleTestBroadcast}
       >
@@ -81,13 +89,23 @@ export default function BroadcastUpdate() {
           onClick={handleDelete}
           variant="delete"
           className="w-full"
+          disabled={isUpdateLoading || isTestLoading || isStartLoading}
           isLoading={isDeleteLoading}
         >
           Удалить рассылку
         </FormButton>
-        <FormButton type="button" variant="update" className="w-full">
-          Протестировать рассылку
-        </FormButton>
+        {broadcast.status === BroadcastStatus.PENDING && (
+          <FormButton
+            type="button"
+            variant="update"
+            className="w-full"
+            disabled={isUpdateLoading || isTestLoading || isStartLoading}
+            isLoading={isStartLoading}
+            onClick={handleStartBroadcast}
+          >
+            Начать рассылку
+          </FormButton>
+        )}
       </BroadcastForm>
     </ContentWrapper>
   );

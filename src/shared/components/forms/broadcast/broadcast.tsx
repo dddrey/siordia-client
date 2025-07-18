@@ -33,7 +33,7 @@ const BroadcastForm = ({
     resolver: zodResolver(broadcastSchema),
     defaultValues: {
       text: broadcast?.text || "",
-      imageUrl: broadcast?.imageUrl || "",
+      fileId: broadcast?.fileId || "",
       buttonText: broadcast?.buttonText || "",
       buttonUrl: broadcast?.buttonUrl || "",
     },
@@ -69,11 +69,11 @@ const BroadcastForm = ({
           />
 
           <FormField<BroadcastFormValues>
-            id="imageUrl"
-            label="Ссылка на картинку (необязательно)"
-            placeholder="https://example.com/image.jpg"
+            id="fileId"
+            label="Telegram File ID (необязательно)"
+            placeholder="BAACAgIAAxkBAAICE2d..."
             register={register}
-            error={errors.imageUrl}
+            error={errors.fileId}
             disabled={isLoading || isSubmitting}
           />
 

@@ -6,21 +6,14 @@ export const broadcastSchema = z
       .string()
       .min(10, "Текст должен содержать минимум 10 символов")
       .max(4000, "Текст не должен превышать 4000 символов"),
-    imageUrl: z
+    fileId: z
       .string()
       .refine((val) => {
         if (!val || val.trim() === "") return true; // Пустое значение разрешено
-        return val.startsWith("https://");
-      }, "Ссылка на картинку должна начинаться с https://")
-      .refine((val) => {
-        if (!val || val.trim() === "") return true; // Пустое значение разрешено
-        try {
-          new URL(val);
-          return true;
-        } catch {
-          return false;
-        }
-      }, "Введите корректную ссылку на картинку")
+        // Telegram file ID обычно содержит буквы, цифры, дефисы и подчеркивания
+        const telegramFileIdRegex = /^[A-Za-z0-9_-]+$/;
+        return telegramFileIdRegex.test(val);
+      }, "Введите корректный Telegram file ID")
       .optional()
       .or(z.literal("")),
     buttonText: z
