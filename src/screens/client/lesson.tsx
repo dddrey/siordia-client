@@ -84,6 +84,7 @@ const LessonScreen = () => {
         </div>
       )}
       {lesson.tasks && <TaskList tasks={lesson.tasks} />}
+      {lesson.tasks && <div className="h-[80px]"></div>}
     </ContentWrapper>
   );
 };
