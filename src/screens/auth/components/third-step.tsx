@@ -30,13 +30,13 @@ const ThirdStep = () => {
       {!user?.chatId && (
         <Fragment>
           <p className="text-5xl font-semibold text-textAccent mb-2">
-            Еще чуть-чуть и начнем тренеровку!
+            Еще чуть-чуть и начнем тренировку!
           </p>
           <p className="text-2xl text-textSecondary mt-4">
             Осталось только подключить бота
             <br />
             <span className="text-2xl text-textSecondary">
-              Что бы получать уведомления о новых уроках и заданиях.
+              Чтобы получать уведомления о новых уроках и заданиях.
             </span>
           </p>
           <div className="flex w-full mt-4 flex-1 items-end justify-center mb-10">
