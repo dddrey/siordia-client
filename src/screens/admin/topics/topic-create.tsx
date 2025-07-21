@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import TopicChoose from "@/shared/components/choose/topic";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const TopicCreateScreen = () => {
@@ -59,9 +58,4 @@ const TopicCreateScreen = () => {
   );
 };
 
-TopicCreateScreen.displayName = "TopicCreateScreen";
-
-const WrappedTopicCreateScreen = withAdmin(TopicCreateScreen) as React.FC;
-WrappedTopicCreateScreen.displayName = "WrappedTopicCreateScreen";
-
-export default WrappedTopicCreateScreen;
+export default TopicCreateScreen;

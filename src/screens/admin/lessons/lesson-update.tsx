@@ -10,8 +10,9 @@ import {
 import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import FormButton from "@/shared/components/ui/form-button";
-import withAdmin from "@/shared/components/hoc/admin";
 import useBackButton from "@/shared/hooks/use-backbutton";
+import { handleOpenAppLink } from "@/shared/utils/uri-links";
+
 const LessonUpdateScreen = () => {
   const { id } = useParams();
   const { data: lesson, isLoading, error } = useLesson(id as string);
@@ -89,14 +90,17 @@ const LessonUpdateScreen = () => {
         >
           Удалить урок
         </FormButton>
+        <FormButton
+          type="button"
+          onClick={() => handleOpenAppLink(`/lesson/${id}`)}
+          variant="create"
+          className="w-full"
+        >
+          Открыть в приложении
+        </FormButton>
       </LessonForm>
     </ContentWrapper>
   );
 };
 
-LessonUpdateScreen.displayName = "LessonUpdateScreen";
-
-const WrappedLessonUpdateScreen = withAdmin(LessonUpdateScreen) as React.FC;
-WrappedLessonUpdateScreen.displayName = "WrappedLessonUpdateScreen";
-
-export default WrappedLessonUpdateScreen;
+export default LessonUpdateScreen;

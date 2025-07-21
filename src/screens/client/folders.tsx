@@ -4,7 +4,6 @@ import { useFolders } from "@/shared/hooks/use-folders";
 import { useSearchParams } from "react-router-dom";
 import { ContentType } from "@/shared/types/interfaces";
 import LogoImage from "@/shared/components/logo-Image";
-import withAuth from "@/shared/components/hoc/auth";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const FoldersScreen = () => {
@@ -50,9 +49,4 @@ const FoldersScreen = () => {
   );
 };
 
-FoldersScreen.displayName = "FoldersScreen";
-
-const WrappedFoldersScreen = withAuth(FoldersScreen) as React.FC;
-WrappedFoldersScreen.displayName = "WrappedFoldersScreen";
-
-export default WrappedFoldersScreen;
+export default FoldersScreen;

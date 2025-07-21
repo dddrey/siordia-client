@@ -20,6 +20,7 @@ const AdminMenuSidebar = () => {
           <MenuLink onClick={close} text="Папки" path="/admin/folders" />
           <MenuLink onClick={close} text="Темы" path="/admin/topics" />
           <MenuLink onClick={close} text="Уроки" path="/admin/lessons" />
+          <MenuLink onClick={close} text="Рассылки" path="/admin/broadcasts" />
           <MenuLink onClick={close} text="Ревью" path="/admin/reviews" />
         </div>
       </div>

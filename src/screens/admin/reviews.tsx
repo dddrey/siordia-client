@@ -1,4 +1,3 @@
-import withAdmin from "@/shared/components/hoc/admin";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
 import useBackButton from "@/shared/hooks/use-backbutton";
 const ReviewsScreen = () => {
@@ -18,9 +17,4 @@ const ReviewsScreen = () => {
   );
 };
 
-ReviewsScreen.displayName = "ReviewsScreen";
-
-const WrappedReviewsScreen = withAdmin(ReviewsScreen) as React.FC;
-WrappedReviewsScreen.displayName = "WrappedReviewsScreen";
-
-export default WrappedReviewsScreen;
+export default ReviewsScreen;

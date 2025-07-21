@@ -10,7 +10,6 @@ import ErrorComponent from "@/shared/components/error";
 import { useEffect } from "react";
 import { ContentType } from "@/shared/types/interfaces";
 import { useHistoryCardStore } from "@/shared/store/use-history-card";
-import withAuth from "@/shared/components/hoc/auth";
 import VideoPlayer from "@/shared/components/video-player";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
@@ -90,9 +89,4 @@ const LessonScreen = () => {
   );
 };
 
-LessonScreen.displayName = "LessonScreen";
-
-const WrappedLessonScreen = withAuth(LessonScreen) as React.FC;
-WrappedLessonScreen.displayName = "WrappedLessonScreen";
-
-export default WrappedLessonScreen;
+export default LessonScreen;

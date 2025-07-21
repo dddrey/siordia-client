@@ -26,11 +26,20 @@ const useBackButton = ({ func, isOpen }: UseBackButtonOptions) => {
       };
     }
     if (!func && backButton) {
-      backButton.onClick(() => navigate(-1));
+      const defaultBackHandler = () => {
+        if (window.history.length > 1) {
+          navigate(-1);
+        } else {
+          navigate("/");
+        }
+      };
+
+      backButton.onClick(defaultBackHandler);
+      previousFuncRef.current = defaultBackHandler;
     }
     return () => {
-      if (backButton) {
-        backButton.offClick(() => navigate(-1));
+      if (backButton && previousFuncRef.current) {
+        backButton.offClick(previousFuncRef.current);
       }
     };
   }, [func, backButton, navigate]);

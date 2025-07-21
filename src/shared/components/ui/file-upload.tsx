@@ -80,28 +80,28 @@ const FileUpload = ({
       {...getRootProps()}
       className={cn(
         "w-full p-4 flex flex-col items-center justify-center gap-4",
-        "border-2 border-dashed rounded-lg transition-colors",
-        "hover:border-gray-400 cursor-pointer",
+        "border-2 border-dashed rounded-[8px] transition-colors",
+        "hover:border-blue-500 cursor-pointer",
         {
           "opacity-50 cursor-not-allowed": disabled,
-          "border-gray-400": isDragActive,
-          "border-gray-200": !isDragActive,
+          "border-blue-500": isDragActive,
+          "border-border": !isDragActive,
         }
       )}
     >
       <input {...getInputProps()} />
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="p-4 rounded-full bg-gray-100">
+        <div className="p-4 rounded-full bg-inherit border border-gray-500">
           {loading ? (
-            <UploadCloud className="h-6 w-6 animate-bounce" />
+            <UploadCloud className="h-6 w-6 animate-bounce text-blue-500" />
           ) : accept === "image" ? (
-            <ImageIcon className="h-6 w-6" />
+            <ImageIcon className="h-6 w-6 text-gray-500" />
           ) : (
-            <Video className="h-6 w-6" />
+            <Video className="h-6 w-6 text-gray-500" />
           )}
         </div>
         <div className="text-center">
-          <p className="text-sm font-medium">
+          <p className="text-sm font-medium text-gray-500">
             {loading ? (
               "Загрузка..."
             ) : (

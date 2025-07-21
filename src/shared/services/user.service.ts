@@ -7,6 +7,11 @@ class UserService {
     console.log(response.data);
     return response.data;
   }
+
+  async updateUser(): Promise<User> {
+    const response = await api.put<User>("/user");
+    return response.data;
+  }
 }
 
 export const userService = new UserService();

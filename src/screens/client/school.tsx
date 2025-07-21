@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import ContentWrapper from "@/shared/components/wrappers/content-wrapper";
-import withAuth from "@/shared/components/hoc/auth";
 import useBackButton from "@/shared/hooks/use-backbutton";
 
 const SchoolScreen = () => {
@@ -79,9 +78,4 @@ const SchoolScreen = () => {
   );
 };
 
-SchoolScreen.displayName = "SchoolScreen";
-
-const WrappedSchoolScreen = withAuth(SchoolScreen) as React.FC;
-WrappedSchoolScreen.displayName = "WrappedSchoolScreen";
-
-export default WrappedSchoolScreen;
+export default SchoolScreen;
