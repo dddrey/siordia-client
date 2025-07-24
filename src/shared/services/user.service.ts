@@ -1,4 +1,8 @@
-import { User } from "../types/interfaces";
+import {
+  User,
+  GetAllUsersParams,
+  GetAllUsersResponse,
+} from "../types/interfaces";
 import api from "../utils/axios-instance";
 
 class UserService {
@@ -10,6 +14,23 @@ class UserService {
 
   async updateUser(): Promise<User> {
     const response = await api.put<User>("/user");
+    return response.data;
+  }
+
+  async getAllUsers(
+    params: GetAllUsersParams = {}
+  ): Promise<GetAllUsersResponse> {
+    const response = await api.get<GetAllUsersResponse>("/user/all", {
+      params,
+    });
+    console.log(response.data);
+    return response.data;
+  }
+
+  async exportUsers(): Promise<Blob> {
+    const response = await api.get("/user/export", {
+      responseType: "blob", // Важно для получения файла
+    });
     return response.data;
   }
 }

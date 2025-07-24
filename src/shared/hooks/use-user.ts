@@ -2,8 +2,10 @@ import { toast } from "react-hot-toast";
 import { userService } from "../services/user.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { GetAllUsersParams } from "../types/interfaces";
 
 export const USER_QUERY_KEY = "user";
+export const ALL_USERS_QUERY_KEY = "allUsers";
 
 export const useUser = () => {
   return useQuery({
@@ -27,6 +29,37 @@ export const useUpdateUser = () => {
     },
     onError: () => {
       toast.error("Вы не подключили бота");
+    },
+  });
+};
+
+export const useAllUsers = (params: GetAllUsersParams = {}) => {
+  return useQuery({
+    queryKey: [ALL_USERS_QUERY_KEY, params],
+    queryFn: () => userService.getAllUsers(params),
+    staleTime: 2 * 60 * 1000, // 2 минуты
+    retry: 1,
+  });
+};
+
+export const useExportUsers = () => {
+  return useMutation({
+    mutationFn: () => userService.exportUsers(),
+    onSuccess: (blob) => {
+      // Создаем ссылку для скачивания файла
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `users_export_${new Date().toISOString().split("T")[0]}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success("Файл успешно экспортирован!");
+    },
+    onError: () => {
+      toast.error("Ошибка при экспорте файла");
     },
   });
 };

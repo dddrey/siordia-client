@@ -11,7 +11,7 @@ import Topic from "@/screens/client/topic";
 import FoldersAdmin from "@/screens/admin/folders/folders";
 import FolderUpdate from "@/screens/admin/folders/folder-update";
 import LessonsAdmin from "@/screens/admin/lessons/lessons";
-import Statistics from "@/screens/admin/statistics";
+import Statistics from "@/screens/admin/statistics/statistics";
 import TopicsAdmin from "@/screens/admin/topics/topics";
 import TopicUpdate from "@/screens/admin/topics/topic-update";
 import FolderCreate from "@/screens/admin/folders/folder-create";
@@ -29,6 +29,7 @@ import ClientProtectedRoutes from "../providers/auth/client";
 import BroadcastsAdmin from "@/screens/admin/broadcast/broadcasts";
 import BroadcastUpdate from "@/screens/admin/broadcast/broadcast-update";
 import { PathnameProvider } from "../providers/pathname/pathname";
+import UsersStatistics from "@/screens/admin/statistics/users";
 
 const Router = () => {
   return (
@@ -61,6 +62,7 @@ const Router = () => {
           <Route path="/admin/lesson/:id" element={<LessonUpdate />} />
           <Route path="/admin/lesson/create" element={<LessonCreate />} />
           <Route path="/admin/statistics" element={<Statistics />} />
+          <Route path="/admin/statistics/users" element={<UsersStatistics />} />
           <Route path="/admin/reviews" element={<ReviewAdmin />} />
           <Route path="/admin/broadcasts" element={<BroadcastsAdmin />} />
           <Route path="/admin/broadcast/create" element={<BroadcastAdmin />} />
