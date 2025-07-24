@@ -16,6 +16,7 @@ import ErrorComponent from "@/shared/components/error";
 import LoadingOverview from "@/shared/components/loading-overview";
 import useBackButton from "@/shared/hooks/use-backbutton";
 import { handleOpenAppLink } from "@/shared/utils/uri-links";
+import StatCard from "./stat-card";
 
 const StatisticsScreen = () => {
   const { data, isLoading, error } = useStatistics();
@@ -47,6 +48,7 @@ const StatisticsScreen = () => {
           title="Пользователи"
           value={data.overview.totalUsers}
           icon={<Users size={20} />}
+          link="/admin/statistics/users"
         />
         <StatCard
           title="Подписок футболистов"
@@ -143,21 +145,5 @@ const StatisticsScreen = () => {
     </ContentWrapper>
   );
 };
-
-interface StatCardProps {
-  title: string;
-  value: number;
-  icon: React.ReactNode;
-}
-
-const StatCard = ({ title, value, icon }: StatCardProps) => (
-  <div className="bg-primary flex justify-between items-center shadow-card-sm-light rounded-[10px] p-3">
-    <div className="flex items-center gap-2">
-      {icon}
-      <span className="text-[16px] font-medium text-textPrimary">{title}</span>
-    </div>
-    <p className="text-3xl font-bold text-textPrimary">{value}</p>
-  </div>
-);
 
 export default StatisticsScreen;

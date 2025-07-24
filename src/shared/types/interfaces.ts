@@ -60,6 +60,28 @@ export interface User {
   chatId: string;
 }
 
+// Параметры для получения всех пользователей с пагинацией
+export interface GetAllUsersParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  sortBy?: "createdAt" | "username" | "registrationDate" | "isActive";
+  sortOrder?: "asc" | "desc";
+}
+
+// Ответ API для получения всех пользователей с пагинацией
+export interface GetAllUsersResponse {
+  users: User[];
+  pagination: {
+    page: number; // изменено с currentPage
+    totalPages: number;
+    total: number; // изменено с totalUsers
+    limit: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}
+
 export interface ISubscription {
   id: string;
   type: ContentType;
