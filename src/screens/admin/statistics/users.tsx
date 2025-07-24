@@ -199,7 +199,7 @@ const UsersStatistics = () => {
         </div>
 
         {/* Кнопки пагинации */}
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center gap-2 my-4">
           <button
             onClick={goToPrevPage}
             className="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all border-2 border-accent hover:bg-accent/10"
