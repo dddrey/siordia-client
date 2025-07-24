@@ -6,7 +6,6 @@ import { useState } from "react";
 import type { GetAllUsersParams } from "@/shared/types/interfaces";
 import Skeleton from "@/shared/components/ui/skeleton";
 import useTelegram from "@/shared/hooks/use-telegram";
-import { toast } from "react-hot-toast";
 
 const UsersStatistics = () => {
   const { openInTelegramLinkFunc } = useTelegram();
@@ -14,7 +13,6 @@ const UsersStatistics = () => {
 
   const handleUserClick = (username?: string) => {
     if (username) {
-      toast.success(`Переход к @${username}`);
       openInTelegramLinkFunc(`https://t.me/${username}`);
     }
   };
