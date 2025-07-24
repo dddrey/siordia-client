@@ -35,42 +35,42 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<PathnameProvider />}>
-        {/* <Route path="/" element={<ClientProtectedRoutes />}> */}
-        <Route path="/" element={<Main />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/reviews" element={<Review />} />
-        <Route path="/school" element={<School />} />
-        <Route path="/subscriptions" element={<Subscriptions />} />
-        <Route path="/folders" element={<Folders />} />
-        <Route path="/folders/:id" element={<Folder />} />
-        <Route path="/topics/:id" element={<Topic />} />
-        <Route path="/lesson/:id" element={<Lesson />} />
-        <Route path="/review/:id" element={<Review />} />
+        <Route path="/" element={<ClientProtectedRoutes />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/reviews" element={<Review />} />
+          <Route path="/school" element={<School />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="/folders" element={<Folders />} />
+          <Route path="/folders/:id" element={<Folder />} />
+          <Route path="/topics/:id" element={<Topic />} />
+          <Route path="/lesson/:id" element={<Lesson />} />
+          <Route path="/review/:id" element={<Review />} />
+        </Route>
+
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/error-auth" element={<ErrorAuth />} />
+
+        <Route path="/admin" element={<AdminProtectedRoutes />}>
+          <Route path="/admin/folders" element={<FoldersAdmin />} />
+          <Route path="/admin/folder/:id" element={<FolderUpdate />} />
+          <Route path="/admin/folder/create" element={<FolderCreate />} />
+          <Route path="/admin/topics" element={<TopicsAdmin />} />
+          <Route path="/admin/topic/:id" element={<TopicUpdate />} />
+          <Route path="/admin/topic/create" element={<TopicCreate />} />
+          <Route path="/admin/lessons" element={<LessonsAdmin />} />
+          <Route path="/admin/lesson/:id" element={<LessonUpdate />} />
+          <Route path="/admin/lesson/create" element={<LessonCreate />} />
+          <Route path="/admin/statistics" element={<Statistics />} />
+          <Route path="/admin/statistics/users" element={<UsersStatistics />} />
+          <Route path="/admin/reviews" element={<ReviewAdmin />} />
+          <Route path="/admin/broadcasts" element={<BroadcastsAdmin />} />
+          <Route path="/admin/broadcast/create" element={<BroadcastAdmin />} />
+          <Route path="/admin/broadcast/:id" element={<BroadcastUpdate />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Route>
-
-      <Route path="/auth" element={<Auth />} />
-      <Route path="/error-auth" element={<ErrorAuth />} />
-
-      <Route path="/admin" element={<AdminProtectedRoutes />}>
-        <Route path="/admin/folders" element={<FoldersAdmin />} />
-        <Route path="/admin/folder/:id" element={<FolderUpdate />} />
-        <Route path="/admin/folder/create" element={<FolderCreate />} />
-        <Route path="/admin/topics" element={<TopicsAdmin />} />
-        <Route path="/admin/topic/:id" element={<TopicUpdate />} />
-        <Route path="/admin/topic/create" element={<TopicCreate />} />
-        <Route path="/admin/lessons" element={<LessonsAdmin />} />
-        <Route path="/admin/lesson/:id" element={<LessonUpdate />} />
-        <Route path="/admin/lesson/create" element={<LessonCreate />} />
-        <Route path="/admin/statistics" element={<Statistics />} />
-        <Route path="/admin/statistics/users" element={<UsersStatistics />} />
-        <Route path="/admin/reviews" element={<ReviewAdmin />} />
-        <Route path="/admin/broadcasts" element={<BroadcastsAdmin />} />
-        <Route path="/admin/broadcast/create" element={<BroadcastAdmin />} />
-        <Route path="/admin/broadcast/:id" element={<BroadcastUpdate />} />
-      </Route>
-
-      <Route path="*" element={<NotFound />} />
-      {/* </Route> */}
     </Routes>
   );
 };
