@@ -28,9 +28,7 @@ class UserService {
   }
 
   async exportUsers(): Promise<Blob> {
-    const response = await api.get("/user/export", {
-      responseType: "blob", // Важно для получения файла
-    });
+    const response = await api.get("/user/export");
     return response.data;
   }
 }

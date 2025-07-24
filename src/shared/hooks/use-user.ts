@@ -45,17 +45,7 @@ export const useAllUsers = (params: GetAllUsersParams = {}) => {
 export const useExportUsers = () => {
   return useMutation({
     mutationFn: () => userService.exportUsers(),
-    onSuccess: (blob) => {
-      // Создаем ссылку для скачивания файла
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `users_export_${new Date().toISOString().split("T")[0]}.xlsx`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-
+    onSuccess: () => {
       toast.success("Файл успешно экспортирован!");
     },
     onError: () => {
