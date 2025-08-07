@@ -28,8 +28,9 @@ import AdminProtectedRoutes from "../providers/auth/admin";
 import ClientProtectedRoutes from "../providers/auth/client";
 import BroadcastsAdmin from "@/screens/admin/broadcast/broadcasts";
 import BroadcastUpdate from "@/screens/admin/broadcast/broadcast-update";
-import { PathnameProvider } from "../providers/pathname/pathname";
+import PathnameProvider from "../providers/pathname/pathname";
 import UsersStatistics from "@/screens/admin/statistics/users";
+import SubscriptionsAdmin from "@/screens/admin/statistics/subscriptions";
 
 const Router = () => {
   return (
@@ -63,6 +64,10 @@ const Router = () => {
           <Route path="/admin/lesson/create" element={<LessonCreate />} />
           <Route path="/admin/statistics" element={<Statistics />} />
           <Route path="/admin/statistics/users" element={<UsersStatistics />} />
+          <Route
+            path="/admin/statistics/subscriptions"
+            element={<SubscriptionsAdmin />}
+          />
           <Route path="/admin/reviews" element={<ReviewAdmin />} />
           <Route path="/admin/broadcasts" element={<BroadcastsAdmin />} />
           <Route path="/admin/broadcast/create" element={<BroadcastAdmin />} />

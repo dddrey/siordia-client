@@ -28,6 +28,8 @@ const UsersStatistics = () => {
     sortOrder: "desc",
   });
 
+  // setParams будет использован позже для пагинации и фильтрации
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateParams = setParams;
 
   const { data, isLoading, error } = useAllUsers(params);
