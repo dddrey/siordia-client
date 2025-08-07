@@ -6,7 +6,7 @@ import {
   handleOpenAppLink,
 } from "@/shared/utils/uri-links";
 
-export const PathnameProvider = () => {
+const PathnameProvider = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const navigatedRef = useRef(false);
@@ -18,7 +18,6 @@ export const PathnameProvider = () => {
 
   useEffect(() => {
     if (navigatedRef.current) return;
-    console.log(handleOpenAppLink(location.pathname));
     const path = getDecodedPathFromInitData();
     if (path) {
       navigatedRef.current = true;
@@ -29,3 +28,5 @@ export const PathnameProvider = () => {
 
   return <Outlet />;
 };
+
+export default PathnameProvider;

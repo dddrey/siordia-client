@@ -82,6 +82,14 @@ export interface GetAllUsersResponse {
   };
 }
 
+// Запрос для выдачи подписки админом
+export interface AdminGrantSubscriptionRequest {
+  userId?: string;
+  username?: string;
+  type: ContentType;
+  months: number;
+}
+
 export interface ISubscription {
   id: string;
   type: ContentType;

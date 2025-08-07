@@ -51,19 +51,14 @@ const StatisticsScreen = () => {
           link="/admin/statistics/users"
         />
         <StatCard
-          title="Подписок футболистов"
-          value={data.subscriptionsByType.player}
+          title="Подписки"
+          value={
+            data.subscriptionsByType.player +
+            (data.subscriptionsByType.coach ?? 0) +
+            (data.subscriptionsByType.parent ?? 0)
+          }
           icon={<CreditCard size={20} />}
-        />
-        <StatCard
-          title="Подписок тренеров"
-          value={data.subscriptionsByType.coach}
-          icon={<CreditCard size={20} />}
-        />
-        <StatCard
-          title="Подписок родителей"
-          value={data.subscriptionsByType.parent}
-          icon={<CreditCard size={20} />}
+          link="/admin/statistics/subscriptions"
         />
         <StatCard
           title="Папки"

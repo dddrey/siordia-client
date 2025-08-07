@@ -1,13 +1,35 @@
 import { subscriptionsService } from "../services/subscription.service";
-import { ContentType } from "../types/interfaces";
+import {
+  AdminGrantSubscriptionRequest,
+  ContentType,
+} from "../types/interfaces";
 import { useState } from "react";
-import { useUser } from "./use-user";
+import { ALL_USERS_QUERY_KEY, useUser } from "./use-user";
 import { toast } from "react-hot-toast";
 import { useSubscriptionModal } from "../store/use-subscription-modal";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FOLDERS_QUERY_KEY } from "./use-folders";
 import { LESSONS_QUERY_KEY } from "./use-lessons";
 import { TOPICS_QUERY_KEY } from "./use-topics";
+
+export const useGrantSubscription = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: AdminGrantSubscriptionRequest) =>
+      subscriptionsService.grantSubscription(data),
+    onSuccess: () => {
+      // Обновляем список пользователей после выдачи подписки
+      queryClient.invalidateQueries({ queryKey: [ALL_USERS_QUERY_KEY] });
+      toast.success("Подписка успешно выдана!");
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message || "Ошибка при выдаче подписки";
+      toast.error(message);
+    },
+  });
+};
 
 export const useSubscription = () => {
   const { data: user, refetch } = useUser();
