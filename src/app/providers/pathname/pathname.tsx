@@ -3,7 +3,6 @@ import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import {
   getDecodedPathFromInitData,
   CURRENT_PATH_KEY,
-  handleOpenAppLink,
 } from "@/shared/utils/uri-links";
 
 const PathnameProvider = () => {
